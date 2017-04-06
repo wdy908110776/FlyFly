@@ -125,7 +125,5 @@ wss.on('connection', function(ws) {
 });
 
 server.listen(8080, function() {
-  console.log('Listening on port 8080');
+  console.log('ReadyForStart');
 });
-// https://bubble-richardchen.c9users.io
-//s
