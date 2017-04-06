@@ -3,26 +3,24 @@
   <head>
   </head>
   <body>
-    <h2 id="player"></h2>
+    <h2 id="player"></h1>
     <h1 id="countdown"></h1>
     <h3 id='charge'></h3>
   <br>
     CHARGE
-    <button id="charge">YUN</button>
+    <button id="charge" value=0>YUN</button>
   <br>
     ATTACK
-    <button id="bubble">PAOPAO</button>
-    <button id="copper bubble">TONGBAOBAO</button>
-    <button id="iron bubble">TIEPAOPAO</button>
-    <button id="gold bubble">JINPAOPAO</button>
-    <button id="crystal bubble">SHUIJINGPAOPAO</button>
-    <button id="diamond bubble">ZHUANSHIPAOPAO</button>
+    <button id="bubble" value=1>PAOPAO</button>
+    <button id="copper bubble" value=2>TONGBAOBAO</button>
+    <button id="iron bubble" value=3>TIEPAOPAO</button>
+    <button id="gold bubble" value=4>JINPAOPAO</button>
+    <button id="crystal bubble" value=5>SHUIJINGPAOPAO</button>
+    <button id="diamond bubble" value=6>ZHUANSHIPAOPAO</button>
   <br>
     DEFENSE
-    <button id="normal">PUFANG</button>
-    <button id="super">CHAOFANG</button>
-    <button id="golden">JINFANG</button>
-
+    <button id="normal" value="=">PUFANG</button>
+    <button id="super" value="==">CHAOFANG</button>
     <script>
     var host = document.location.host.replace(/:.*/, '');
     var ws = new WebSocket('ws://' + host + ':8080');
@@ -31,10 +29,33 @@
       if (data.player) {
         document.querySelector('#player').innerHTML = data.player;
       }
-msg.innerHTML = JSON.parse(event.data).message;
-      document.body.appendChild(msg);
-      console.log(JSON.parse(event.data));
+      var countdown = document.querySelector('#countdown');
+      if (data.start) {
+        setTimeout(function() { countdown.innerHTML = 'Pao' }, 1000);
+        setTimeout(function() { countdown.innerHTML = 'Pao' }, 3000);
+        setTimeout(function() { countdown.innerHTML = 'Yun' }, 5000);
+      }
+      if (data.tie) {
+        countdown.innerHTML = 'IT\'S A TIE';
+      } else if (data.win === true) {
+        countdown.innerHTML = 'YOU WIN!';
+      } else if (data.win === false) {
+        countdown.innerHTML = 'YOU LOSE';
+      }
     }
+    document.querySelector('#rock').onclick = function() {
+      ws.send(JSON.stringify({ choice: 'ROCK' }));
+    }
+    document.querySelector('#paper').onclick = function() {
+      ws.send(JSON.stringify({ choice: 'PAPER' }));
+    }
+    document.querySelector('#scissor').onclick = function() {
+      ws.send(JSON.stringify({ choice: 'SCISSOR' }));
+    }
+    window.onbeforeunload = function() {
+      ws.onclose = function () {};
+      ws.close()
+  };
     </script>
   </body>
 </html>
