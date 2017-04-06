@@ -3,7 +3,7 @@
   <head>
   </head>
   <body>
-    <h2 id="player"></h2>
+    <h2 id="player"></h1>
     <h1 id="countdown"></h1>
     <button id="rock">ROCK</button>
     <button id="paper">PAPER</button>
@@ -17,10 +17,34 @@
       if (data.player) {
         document.querySelector('#player').innerHTML = data.player;
       }
-msg.innerHTML = JSON.parse(event.data).message;
-      document.body.appendChild(msg);
-      console.log(JSON.parse(event.data));
+      var countdown = document.querySelector('#countdown');
+      if (data.start) {
+        setTimeout(function() { countdown.innerHTML = 'ROCK' }, 1000);
+        setTimeout(function() { countdown.innerHTML = 'PAPER' }, 2000);
+        setTimeout(function() { countdown.innerHTML = 'SCISSOR' }, 3000);
+        setTimeout(function() { countdown.innerHTML = 'SHOOT!' }, 4000);
+      }
+      if (data.tie) {
+        countdown.innerHTML = 'IT\'S A TIE';
+      } else if (data.win === true) {
+        countdown.innerHTML = 'YOU WIN!';
+      } else if (data.win === false) {
+        countdown.innerHTML = 'YOU LOSE';
+      }
     }
+    document.querySelector('#rock').onclick = function() {
+      ws.send(JSON.stringify({ choice: 'ROCK' }));
+    }
+    document.querySelector('#paper').onclick = function() {
+      ws.send(JSON.stringify({ choice: 'PAPER' }));
+    }
+    document.querySelector('#scissor').onclick = function() {
+      ws.send(JSON.stringify({ choice: 'SCISSOR' }));
+    }
+    window.onbeforeunload = function() {
+      ws.onclose = function () {};
+      ws.close()
+  };
     </script>
   </body>
 </html>
