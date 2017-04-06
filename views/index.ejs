@@ -1,1 +1,26 @@
-hi
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h2 id="player"></h2>
+    <h1 id="countdown"></h1>
+    <button id="rock">ROCK</button>
+    <button id="paper">PAPER</button>
+    <button id="scissor">SCISSOR</button>
+
+    <script>
+    var host = document.location.host.replace(/:.*/, '');
+    var ws = new WebSocket('ws://' + host + ':8080');
+    ws.onmessage = function(event) {
+      var data = JSON.parse(event.data);
+      if (data.player) {
+        document.querySelector('#player').innerHTML = data.player;
+      }
+msg.innerHTML = JSON.parse(event.data).message;
+      document.body.appendChild(msg);
+      console.log(JSON.parse(event.data));
+    }
+    </script>
+  </body>
+</html>
