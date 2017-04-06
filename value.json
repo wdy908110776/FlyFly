@@ -15,6 +15,7 @@
         {
             "name":"gold bubble",
             "value": 4
+            
         },
         {
             "name":"crystal bubble",
@@ -33,6 +34,10 @@
         {
             "name": "super"
             "value": "=="
-        }
+        },
+        {  
+            "name":"golden"
+            "value":"==="
+        
     ]
 }
