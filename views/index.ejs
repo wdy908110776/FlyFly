@@ -7,21 +7,19 @@
     <h1 id="countdown"></h1>
   <br>
     CHARGE
-    <button id="charge">YUN</button>
+    <button id="charge" value=0>YUN</button>
   <br>
     ATTACK
-    <button id="bubble">PAOPAO</button>
-    <button id="copper bubble">TONGBAOBAO</button>
-    <button id="iron bubble">TIEPAOPAO</button>
-    <button id="gold bubble">JINPAOPAO</button>
-    <button id="crystal bubble">SHUIJINGPAOPAO</button>
-    <button id="diamond bubble">ZHUANSHIPAOPAO</button>
+    <button id="bubble" value=1>PAOPAO</button>
+    <button id="copper bubble" value=2>TONGBAOBAO</button>
+    <button id="iron bubble" value=3>TIEPAOPAO</button>
+    <button id="gold bubble" value=4>JINPAOPAO</button>
+    <button id="crystal bubble" value=5>SHUIJINGPAOPAO</button>
+    <button id="diamond bubble" value=6>ZHUANSHIPAOPAO</button>
   <br>
     DEFENSE
-    <button id="normal">PUFANG</button>
-    <button id="super">CHAOFANG</button>
-    <button id="golden">JINFANG</button>
-
+    <button id="normal" value="=">PUFANG</button>
+    <button id="super" value="==">CHAOFANG</button>
     <script>
     var host = document.location.host.replace(/:.*/, '');
     var ws = new WebSocket('ws://' + host + ':8080');
@@ -32,10 +30,9 @@
       }
       var countdown = document.querySelector('#countdown');
       if (data.start) {
-        setTimeout(function() { countdown.innerHTML = 'ROCK' }, 1000);
-        setTimeout(function() { countdown.innerHTML = 'PAPER' }, 2000);
-        setTimeout(function() { countdown.innerHTML = 'SCISSOR' }, 3000);
-        setTimeout(function() { countdown.innerHTML = 'SHOOT!' }, 4000);
+        setTimeout(function() { countdown.innerHTML = 'Pao' }, 1000);
+        setTimeout(function() { countdown.innerHTML = 'Pao' }, 3000);
+        setTimeout(function() { countdown.innerHTML = 'Yun' }, 5000);
       }
       if (data.tie) {
         countdown.innerHTML = 'IT\'S A TIE';

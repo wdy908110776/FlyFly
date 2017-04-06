@@ -14,9 +14,11 @@ var playersWaiting = [];
 var p2 = null;
 var p1 = null;
 
-var result;
 var gamecontinue=false;
+var energy;
 
+var alive1 = true;
+var alive2 = true;
 
 function startGame() {
   setTimeout(function() {
@@ -32,27 +34,48 @@ function startGame() {
     console.log('Player2', message);
     p2 = JSON.parse(message).choice;
   });
-
-  setTimeout(function() {
     console.log('CHECKING FOR WINNER', p1, p1);
-      if (p1.value == 6 && p2.value != "==") {
-        result = "p1 wins";
-        return;
-      }else if (p2.value == 6 && p1.value != "==") {
-        result = "p2 wins";
-        return;
+      if (p1.value == 0) {
+        energy++;
+      }else if(p1.value>0) {
+        energy = energy.value;
+        if (energy < 0) {
+          alive1 = false;
+        }
+      }
+      if (p2.value == 0) {
+        energy++;
+      }else if(p2.value>0) {
+        energy = energy.value;
+        if (energy < 0) {
+          alive2 = false;
+        }
+      }
+      if (p1.value == 6 && p2.value != '==') {
+        alive2 = false;
+      }else if (p2.value == 6 && p1.value != '==') {
+        alive1 = false;
       }else if (!p1.value/1) {
         p1.value = p2.value;
       }else if(!p2.value/1) {
         p2.value = p1.value;
-      }else if (p1.value == p2.value) {
-        result = "tie";
-        gamecontinue=true;
       }if (p1.value>p2.value){
-        result = "player1 wins";
+        alive2 = false;
       }else if(p2.value>p1.value){
-        result = "player2 wins";
-}
+        alive1 = false;
+      }
+      if (alive1 == alive2) {
+        if (alive1) {
+          console.log('tie');
+          gamecontinue = true;
+        }else {
+          console.log('tie');
+        }
+      }else if(!alive1) {
+        console.log('player2 wins');
+      }else if(!alive1) {
+        console.log('player1wins');
+      }
     // if (player1Choice == player2Choice) {
     //   player1.send(JSON.stringify({ tie: true }));
     //   player2.send(JSON.stringify({ tie: true }));
@@ -77,7 +100,9 @@ function startGame() {
     //     player2.send(JSON.stringify({ win: false }));
     //   }
     // }
-  }, 8000);
+    if (gamecontinue) {
+      startGame(); 
+    }
 }
 
 app.set('view engine', 'ejs');
