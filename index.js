@@ -27,13 +27,10 @@ function startGame() {
     player1.send(JSON.stringify({ start: true}));
     player2.send(JSON.stringify({ start: true}));
   }, 1000);
-  console.log(p2);
   player1.on('message', function(message) {
-    console.log('hi');
     p1 = parseInt(JSON.parse(message).value);
   });
   player2.on('message', function(message) {
-    console.log('hello');
     p2 = parseInt(JSON.parse(message).value);
   });
     setTimeout(function() {
