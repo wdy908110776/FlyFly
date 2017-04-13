@@ -15,12 +15,14 @@ var p2 = null;
 var p1 = null;
 
 var gamecontinue=false;
-var energy;
+var p1energy = 0;
+var p2energy = 0;
 
 var alive1 = true;
 var alive2 = true;
 
 function startGame() {
+  gamecontinue = false;
   setTimeout(function() {
     player1.send(JSON.stringify({ start: true}));
     player2.send(JSON.stringify({ start: true}));
@@ -28,45 +30,44 @@ function startGame() {
 
   player1.on('message', function(message) {
     console.log('Player1', message);
-    p1 = JSON.parse(message).choice;
+    p1 = parseInt(JSON.parse(message).value);
   });
   player2.on('message', function(message) {
     console.log('Player2', message);
-    p2 = JSON.parse(message).choice;
+    p2 = parseInt(JSON.parse(message).value);
   });
-    console.log('CHECKING FOR WINNER', p1, p1);
-      if (p1.value == 0) {
-        energy++;
-      }else if(p1.value>0) {
-        energy = energy.value;
-        if (energy < 0) {
+    setTimeout(function() {
+      if (p1 == 0) {
+        p1energy++;
+      }else if(p1>0) {
+        p1energy -= p1;
+        if (p1energy < 0) {
           alive1 = false;
         }
       }
-      if (p2.value == 0) {
-        energy++;
-      }else if(p2.value>0) {
-        energy = energy.value;
-        if (energy < 0) {
+      if (p2 == 0) {
+        p2energy++;
+      }else if(p2>0) {
+        p2energy -= p2;
+        if (p2energy < 0) {
           alive2 = false;
         }
       }
-      if (p1.value == 6 && p2.value != '==') {
+      if (p1 == 6 && p2 != '==') {
         alive2 = false;
-      }else if (p2.value == 6 && p1.value != '==') {
+      }else if (p2 == 6 && p1 != '==') {
         alive1 = false;
-      }else if (!p1.value/1) {
-        p1.value = p2.value;
-      }else if(!p2.value/1) {
-        p2.value = p1.value;
-      }if (p1.value>p2.value){
+      }else if (!p1/1) {
+        p1 = p2;
+      }else if(!p2/1) {
+        p2 = p1;
+      }if (p1>p2){
         alive2 = false;
-      }else if(p2.value>p1.value){
+      }else if(p2>p1){
         alive1 = false;
       }
       if (alive1 == alive2) {
         if (alive1) {
-          console.log('tie');
           gamecontinue = true;
         }else {
           console.log('tie');
@@ -74,35 +75,14 @@ function startGame() {
       }else if(!alive1) {
         console.log('player2 wins');
       }else if(!alive1) {
-        console.log('player1wins');
+        console.log('player1 wins');
       }
-    // if (player1Choice == player2Choice) {
-    //   player1.send(JSON.stringify({ tie: true }));
-    //   player2.send(JSON.stringify({ tie: true }));
-    // } else {
-    //   if (player1Choice == 'ROCK' && player2Choice == 'PAPER') {
-    //     player1.send(JSON.stringify({ win: false }));
-    //     player2.send(JSON.stringify({ win: true }));
-    //   } else if (player1Choice == 'PAPER' && player2Choice == 'ROCK') {
-    //     player1.send(JSON.stringify({ win: true }));
-    //     player2.send(JSON.stringify({ win: false }));
-    //   } else if (player1Choice == 'ROCK' && player2Choice == 'SCISSOR') {
-    //     player1.send(JSON.stringify({ win: true }));
-    //     player2.send(JSON.stringify({ win: false }));
-    //   } else if (player1Choice == 'SCISSOR' && player2Choice == 'ROCK') {
-    //     player1.send(JSON.stringify({ win: false }));
-    //     player2.send(JSON.stringify({ win: true }));
-    //   } else if (player1Choice == 'PAPER' && player2Choice == 'SCISSOR') {
-    //     player1.send(JSON.stringify({ win: false }));
-    //     player2.send(JSON.stringify({ win: true }));
-    //   } else if (player1Choice == 'SCISSOR' && player2Choice == 'PAPER') {
-    //     player1.send(JSON.stringify({ win: true }));
-    //     player2.send(JSON.stringify({ win: false }));
-    //   }
-    // }
+    console.log('Player1energy', p1energy);
+    console.log('Player2energy', p2energy);
     if (gamecontinue) {
       startGame(); 
     }
+    }, 8000);
 }
 
 app.set('view engine', 'ejs');
@@ -124,8 +104,8 @@ wss.on('connection', function(ws) {
   }
 });
 
-server.listen(8080, function() {
-  console.log('Listening on port 8080');
+server.listen(process.env.PORT, function() {
+  console.log('Listening: ' + process.env.PORT);
 });
 // https://bubble-richardchen.c9users.io
 //s

@@ -7,23 +7,33 @@
     <h1 id="countdown"></h1>
   <br>
     CHARGE
-    <button id="charge" value=0>YUN</button>
+    <button id="charge" value=0>charge</button>
   <br>
     ATTACK
-    <button id="bubble" value=1>PAOPAO</button>
-    <button id="copper bubble" value=2>TONGBAOBAO</button>
-    <button id="iron bubble" value=3>TIEPAOPAO</button>
-    <button id="gold bubble" value=4>JINPAOPAO</button>
-    <button id="crystal bubble" value=5>SHUIJINGPAOPAO</button>
-    <button id="diamond bubble" value=6>ZHUANSHIPAOPAO</button>
+    <button id="bubble" value=1>bubble</button>
+    
+    <button id="copperbubble" value=2>copperbubble</button>
+    <button id="ironbubble" value=3>ironbubble</button>
+    <button id="goldbubble" value=4>goldbubble</button>
+    <button id="crystalbubble" value=5>crystalbubble</button>
+    <button id="diamondbubble" value=6>diamondbubble</button>
   <br>
     DEFENSE
-    <button id="normal" value="=">PUFANG</button>
-    <button id="super" value="==">CHAOFANG</button>
+    <button id="normal" value="=">normal defense</button>
+    <button id="super" value="==">super defense</button>
     <script>
     var host = document.location.host.replace(/:.*/, '');
-    var ws = new WebSocket('ws://' + host + ':8080');
+    var ws = new WebSocket('ws://' + host);
+    console.log('ws://' + host);
+    console.log(ws);
+    ws.onopen = function() {
+      console.log('open', arguments);
+    }
+    ws.onerror = function() {
+      console.log('error, arguments');
+    }
     ws.onmessage = function(event) {
+      console.log(event.data);
       var data = JSON.parse(event.data);
       if (data.player) {
         document.querySelector('#player').innerHTML = data.player;
@@ -34,22 +44,40 @@
         setTimeout(function() { countdown.innerHTML = 'Pao' }, 3000);
         setTimeout(function() { countdown.innerHTML = 'Yun' }, 5000);
       }
-      if (data.tie) {
-        countdown.innerHTML = 'IT\'S A TIE';
-      } else if (data.win === true) {
-        countdown.innerHTML = 'YOU WIN!';
-      } else if (data.win === false) {
-        countdown.innerHTML = 'YOU LOSE';
-      }
+      // if (data.tie) {
+      //   countdown.innerHTML = 'IT\'S A TIE';
+      // } else if (data.win === true) {
+      //   countdown.innerHTML = 'YOU WIN!';
+      // } else if (data.win === false) {
+      //   countdown.innerHTML = 'YOU LOSE';
+      // }
     }
-    document.querySelector('#rock').onclick = function() {
-      ws.send(JSON.stringify({ choice: 'ROCK' }));
+    document.querySelector('#charge').onclick = function() {
+      ws.send(JSON.stringify({ value: 0 }));
     }
-    document.querySelector('#paper').onclick = function() {
-      ws.send(JSON.stringify({ choice: 'PAPER' }));
+    document.querySelector('#bubble').onclick = function() {
+      ws.send(JSON.stringify({ value: 1 }));
     }
-    document.querySelector('#scissor').onclick = function() {
-      ws.send(JSON.stringify({ choice: 'SCISSOR' }));
+    document.querySelector('#copperbubble').onclick = function() {
+      ws.send(JSON.stringify({ value: 2 }));
+    }
+    document.querySelector('#ironbubble').onclick = function() {
+      ws.send(JSON.stringify({ value: 3 }));
+    }
+    document.querySelector('#goldbubble').onclick = function() {
+      ws.send(JSON.stringify({ value: 4 }));
+    }
+    document.querySelector('#crystalbubble').onclick = function() {
+      ws.send(JSON.stringify({ value: 5 }));
+    }
+    document.querySelector('#diamondbubble').onclick = function() {
+      ws.send(JSON.stringify({ value: 6 }));
+    }
+    document.querySelector('#normal').onclick = function() {
+      ws.send(JSON.stringify({ value: '=' }));
+    }
+    document.querySelector('#super').onclick = function() {
+      ws.send(JSON.stringify({ value: '==' }));
     }
     window.onbeforeunload = function() {
       ws.onclose = function () {};
