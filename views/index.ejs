@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <font size="7" color="gold">Bubble</font>
   </head>
   <body>
     <h2 id="player"></h1>
     <h1 id="countdown"></h1>
     <h3 id='charge'></h3>
   <br>
-    CHARGE
-    <button id="charge" value=0>charge</button>
+    <font size="4" color="green">CHARGE</font>
+    <button id="charge" style='color:green' value=0>charge</button>
   <br>
-    ATTACK
-    <button id="bubble" value=1>bubble</button>
-    
-    <button id="copperbubble" value=2>copperbubble</button>
-    <button id="ironbubble" value=3>ironbubble</button>
-    <button id="goldbubble" value=4>goldbubble</button>
-    <button id="crystalbubble" value=5>crystalbubble</button>
-    <button id="diamondbubble" value=6>diamondbubble</button>
+    <font size="4" color="red">ATTACK</font>
+    <button id="bubble" style='color:red' value=1>bubble</button>
+    <button id="copperbubble" style='color:#cc6600' value=2>copperbubble</button>
+    <button id="ironbubble" style='color:#404040' value=3>ironbubble</button>
+    <button id="goldbubble" style='color:gold' value=4>goldbubble</button>
+    <button id="crystalbubble" style='color:#33FFFF' value=5>crystalbubble</button>
+    <button id="diamondbubble" style='color:#cc00cc' value=6>diamondbubble</button>
   <br>
-    DEFENSE
-    <button id="normal" value="=">normal defense</button>
-    <button id="super" value="==">super defense</button>
+    <font size="4" color="blue">DEFENSE</font>
+    <button id="normal" style='color:blue' value="=">normal defense</button>
+    <button id="super" style='color:#330066' value="==">super defense</button>
     <script>
     var host = document.location.host.replace(/:.*/, '');
     var ws = new WebSocket('ws://' + host);
