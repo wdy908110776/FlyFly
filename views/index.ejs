@@ -5,10 +5,10 @@
   <body>
     <h2 id="player"></h1>
     <h1 id="countdown"></h1>
-    <h3 id='charge'></h3>
+    <h3 id='charge1'></h3>
   <br>
     CHARGE
-    <button id="charge" value=0>charge</button>
+    <button id="charge" value=-1>charge</button>
   <br>
     ATTACK
     <button id="bubble" value=1>bubble</button>
@@ -31,7 +31,7 @@
       console.log('open', arguments);
     }
     ws.onerror = function() {
-      console.log('error, arguments');
+      console.log('error', arguments);
     }
     ws.onmessage = function(event) {
       console.log(event.data);
@@ -54,7 +54,7 @@
       // }
     }
     document.querySelector('#charge').onclick = function() {
-      ws.send(JSON.stringify({ value: 0 }));
+      ws.send(JSON.stringify({ value: -1 }));
     }
     document.querySelector('#bubble').onclick = function() {
       ws.send(JSON.stringify({ value: 1 }));

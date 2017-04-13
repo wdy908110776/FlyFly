@@ -11,8 +11,8 @@ var player1 = null;
 var player2 = null;
 var playersWaiting = [];
 
-var p2 = null;
-var p1 = null;
+var p2 = 0;
+var p1 = 0;
 
 var gamecontinue=false;
 var p1energy = 0;
@@ -27,32 +27,26 @@ function startGame() {
     player1.send(JSON.stringify({ start: true}));
     player2.send(JSON.stringify({ start: true}));
   }, 1000);
-
+  console.log(p2);
   player1.on('message', function(message) {
-    console.log('Player1', message);
+    console.log('hi');
     p1 = parseInt(JSON.parse(message).value);
   });
   player2.on('message', function(message) {
-    console.log('Player2', message);
+    console.log('hello');
     p2 = parseInt(JSON.parse(message).value);
   });
     setTimeout(function() {
-      if (p1 == 0) {
-        p1energy++;
-      }else if(p1>0) {
         p1energy -= p1;
         if (p1energy < 0) {
           alive1 = false;
         }
-      }
-      if (p2 == 0) {
-        p2energy++;
-      }else if(p2>0) {
         p2energy -= p2;
         if (p2energy < 0) {
           alive2 = false;
         }
-      }
+        console.log(p1energy);
+        console.log(p2energy);
       if (p1 == 6 && p2 != '==') {
         alive2 = false;
       }else if (p2 == 6 && p1 != '==') {
@@ -73,12 +67,11 @@ function startGame() {
           console.log('tie');
         }
       }else if(!alive1) {
-        console.log('player2 wins');
+        player1.send("you lost");
+        player2.send(JSON.stringify({ win: true }));
       }else if(!alive1) {
-        console.log('player1 wins');
-      }
-    console.log('Player1energy', p1energy);
-    console.log('Player2energy', p2energy);
+        player2.send(JSON.stringify({ win: false }));
+        player1.send(JSON.stringify({ win: true }));      }
     if (gamecontinue) {
       startGame(); 
     }
