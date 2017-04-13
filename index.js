@@ -107,5 +107,3 @@ wss.on('connection', function(ws) {
 server.listen(process.env.PORT, function() {
   console.log('Listening: ' + process.env.PORT);
 });
-// https://bubble-richardchen.c9users.io
-//s
