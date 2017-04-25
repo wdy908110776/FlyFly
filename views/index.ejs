@@ -24,8 +24,8 @@
     <button id="super" style='color:#330066' value="==">super defense</button>
     <script>
     var host = document.location.host.replace(/:.*/, '');
-    var ws = new WebSocket('ws://' + host);
-    console.log('ws://' + host);
+    var ws = new WebSocket('wss://' + host);
+    console.log('wss://' + host);
     console.log(ws);
     ws.onopen = function() {
       console.log('open', arguments);

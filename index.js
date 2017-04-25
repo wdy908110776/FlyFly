@@ -52,7 +52,7 @@ function startGame() {
         p1 = p2;
       }else if(!p2/1) {
         p2 = p1;
-      }if (p1>p2){
+      }else if (p1>p2){
         alive2 = false;
       }else if(p2>p1){
         alive1 = false;
@@ -64,7 +64,7 @@ function startGame() {
           console.log('tie');
         }
       }else if(!alive1) {
-        player1.send("you lost");
+        player1.send(JSON.stringify({ win: false}));
         player2.send(JSON.stringify({ win: true }));
       }else if(!alive1) {
         player2.send(JSON.stringify({ win: false }));
