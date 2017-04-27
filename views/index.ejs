@@ -45,13 +45,13 @@
         setTimeout(function() { countdown.innerHTML = 'Pao' }, 3000);
         setTimeout(function() { countdown.innerHTML = 'Yun' }, 5000);
       }
-      // if (data.tie) {
-      //   countdown.innerHTML = 'IT\'S A TIE';
-      // } else if (data.win === true) {
-      //   countdown.innerHTML = 'YOU WIN!';
-      // } else if (data.win === false) {
-      //   countdown.innerHTML = 'YOU LOSE';
-      // }
+       if (data.tie) {
+         countdown.innerHTML = 'IT\'S A TIE';
+       } else if (data.win === true) {
+         countdown.innerHTML = 'YOU WIN!';
+       } else if (data.win === false) {
+         countdown.innerHTML = 'YOU LOSE';
+       }
     }
     document.querySelector('#charge').onclick = function() {
       ws.send(JSON.stringify({ value: -1 }));
