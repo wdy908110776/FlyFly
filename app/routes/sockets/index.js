@@ -19,15 +19,15 @@ var alive1 = true;
 var alive2 = true;
 
 function startGame() {
+    function hi (ws) {
+        ws.send(JSON.stringify({
+            round: 'round' + round
+        }));
+        ws.send(JSON.stringify({
+            chargeyihao: 'charge' + p1energy
+        }));
+    }
     gamecontinue = false;
-    setTimeout(function() {
-        player1.send(JSON.stringify({
-            start: true
-        }));
-        player2.send(JSON.stringify({
-            start: true
-        }));
-    }, 1000);
     player1.on('message', function(message) {
         p1 = parseInt(JSON.parse(message).value);
     });
@@ -36,9 +36,9 @@ function startGame() {
     });
     setTimeout(function() {
         var temp = p1;
-        if (p1 == '=') {
+        if (p1 == 15) {
             p1 = 0;
-        }else if (p1 == '==') {
+        }else if (p1 == 16) {
             p1 = 1;
         }
         p1energy -= p1;
@@ -47,9 +47,9 @@ function startGame() {
             alive1 = false;
         }
         temp = p2;
-        if (p2 == '=') {
+        if (p2 == 15) {
             p2 = 0;
-        }else if (p2 == '==') {
+        }else if (p2 == 16) {
             p2 = 1;
         }
         p2energy -= p2;
@@ -59,16 +59,16 @@ function startGame() {
         }
         console.log(p1energy);
         console.log(p2energy);
-        if (p1 == 6 && p2 != '==') {
+        if (p1 == 6 && p2 != 15) {
             alive2 = false;
         }
-        else if (p2 == 6 && p1 != '==') {
+        else if (p2 == 6 && p1 != 16) {
             alive1 = false;
         }
-        else if (!p1 / 1) {
+        else if (p1 == 15 || p1 == 16) {
             p1 = p2;
         }
-        else if (!p2 / 1) {
+        else if (p2 == 15 || p2 == 16) {
             p2 = p1;
         }
         else if (p1 > p2) {
@@ -107,13 +107,20 @@ function startGame() {
     }, 8000);
 }
 
-
+var round = 1;
 wss.on('connection', function(ws) {
     if (player1 == null) {
         player1 = ws;
         ws.send(JSON.stringify({
             player: 'Player 1'
         }));
+        ws.send(JSON.stringify({
+            round: 'round' + round
+        }));
+        ws.send(JSON.stringify({
+            chargeyihao: 'charge' + p1energy
+        }));
+        
     }
     else if (player2 == null) {
         player2 = ws;

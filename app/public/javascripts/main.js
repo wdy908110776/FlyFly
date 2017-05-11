@@ -14,6 +14,12 @@ ws.onmessage = function(event) {
     if (data.player) {
         document.querySelector('#player').innerHTML = data.player;
     }
+    if (data.round) {
+        document.querySelector('#round').innerHTML = data.round;
+    }
+    if (data.chargeyihao) {
+        document.querySelector('#chargeyihao').innerHTML = data.chargeyihao;
+    }
     var countdown = document.querySelector('#countdown');
     if (data.start) {
         setTimeout(function() {
@@ -73,12 +79,12 @@ document.querySelector('#diamondbubble').onclick = function() {
 }
 document.querySelector('#normal').onclick = function() {
     ws.send(JSON.stringify({
-        value: '='
+        value: 15
     }));
 }
 document.querySelector('#super').onclick = function() {
     ws.send(JSON.stringify({
-        value: '=='
+        value: 16
     }));
 }
 window.onbeforeunload = function() {
