@@ -73,12 +73,12 @@ document.querySelector('#diamondbubble').onclick = function() {
 }
 document.querySelector('#normal').onclick = function() {
     ws.send(JSON.stringify({
-        value: '='
+        value: 10
     }));
 }
 document.querySelector('#super').onclick = function() {
     ws.send(JSON.stringify({
-        value: '=='
+        value: 15
     }));
 }
 window.onbeforeunload = function() {

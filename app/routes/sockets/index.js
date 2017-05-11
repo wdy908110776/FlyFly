@@ -36,9 +36,9 @@ function startGame() {
     });
     setTimeout(function() {
         var temp = p1;
-        if (p1 == '=') {
+        if (p1 == 10) {
             p1 = 0;
-        }else if (p1 == '==') {
+        }else if (p1 == 15) {
             p1 = 1;
         }
         p1energy -= p1;
@@ -59,10 +59,10 @@ function startGame() {
         }
         console.log(p1energy);
         console.log(p2energy);
-        if (p1 == 6 && p2 != '==') {
+        if (p1 == 6 && p2 != 15) {
             alive2 = false;
         }
-        else if (p2 == 6 && p1 != '==') {
+        else if (p2 == 6 && p1 != 15) {
             alive1 = false;
         }
         else if (!p1 / 1) {
