@@ -1,8 +1,19 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: gray;
 }
 
-a {
-  color: #00B7FF;
+#player {
+  font-size: 40px;
+  color: blue;
+}
+
+#countdown {
+  font-size: 40px;
+  color: blue;
+}
+
+#charge1 {
+  font-size: 40px;
+  color: blue;
 }

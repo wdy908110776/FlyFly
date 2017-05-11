@@ -35,11 +35,25 @@ function startGame() {
         p2 = parseInt(JSON.parse(message).value);
     });
     setTimeout(function() {
+        var temp = p1;
+        if (p1 == '=') {
+            p1 = 0;
+        }else if (p1 == '==') {
+            p1 = 1;
+        }
         p1energy -= p1;
+        p1 = temp;
         if (p1energy < 0) {
             alive1 = false;
         }
+        temp = p2;
+        if (p2 == '=') {
+            p2 = 0;
+        }else if (p2 == '==') {
+            p2 = 1;
+        }
         p2energy -= p2;
+        p2 = temp;
         if (p2energy < 0) {
             alive2 = false;
         }
