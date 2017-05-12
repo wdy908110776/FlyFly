@@ -19,14 +19,19 @@ var alive1 = true;
 var alive2 = true;
 
 function startGame() {
-    function hi (ws) {
-        ws.send(JSON.stringify({
+    round++;
+        player1.send(JSON.stringify({
             round: 'round' + round
         }));
-        ws.send(JSON.stringify({
+        player1.send(JSON.stringify({
             chargeyihao: 'charge' + p1energy
         }));
-    }
+        player2.send(JSON.stringify({
+            round: 'round' + round
+        }));
+        player2.send(JSON.stringify({
+            chargeyihao: 'charge' + p1energy
+        }));
     gamecontinue = false;
     player1.on('message', function(message) {
         p1 = parseInt(JSON.parse(message).value);
@@ -107,20 +112,13 @@ function startGame() {
     }, 8000);
 }
 
-var round = 1;
+var round = 0;
 wss.on('connection', function(ws) {
     if (player1 == null) {
         player1 = ws;
         ws.send(JSON.stringify({
             player: 'Player 1'
         }));
-        ws.send(JSON.stringify({
-            round: 'round' + round
-        }));
-        ws.send(JSON.stringify({
-            chargeyihao: 'charge' + p1energy
-        }));
-        
     }
     else if (player2 == null) {
         player2 = ws;
