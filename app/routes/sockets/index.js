@@ -21,16 +21,16 @@ var alive2 = true;
 function startGame() {
     round++;
         player1.send(JSON.stringify({
-            round: 'round' + round
+            round: 'round ' + round
         }));
         player1.send(JSON.stringify({
-            chargeyihao: 'charge' + p1energy
+            chargeyihao: 'charge ' + p1energy
         }));
         player2.send(JSON.stringify({
-            round: 'round' + round
+            round: 'round ' + round
         }));
         player2.send(JSON.stringify({
-            chargeyihao: 'charge' + p1energy
+            chargeyihao: 'charge ' + p1energy
         }));
     gamecontinue = false;
     player1.on('message', function(message) {
