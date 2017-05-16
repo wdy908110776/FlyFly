@@ -15,10 +15,10 @@ ws.onmessage = function(event) {
         document.querySelector('#player').innerHTML = data.player;
     }
     if (data.round) {
-        document.querySelector('#round').innerHTML = data.round;
+        document.querySelector('#round').innerHTML = 'Round' + data.round;
     }
     if (data.chargeyihao) {
-        document.querySelector('#chargeyihao').innerHTML = data.chargeyihao;
+        document.querySelector('#chargeyihao').innerHTML = 'Charge' + data.chargeyihao;
     }
     var countdown = document.querySelector('#countdown');
     if (data.start) {
