@@ -4,129 +4,180 @@ var wss = socket.server;
 if (!wss) throw new Error('No WebSocket server');
 
 
+
+
+
+
+
+
+
+
+
+
 var player1 = null;
 var player2 = null;
 var playersWaiting = [];
 
-var p2 = 0;
-var p1 = 0;
+var round = 0;
+var gameStarted = false;
 
-var gamecontinue = false;
+var p1choice = null;
+var p2choice = null;
+
 var p1energy = 0;
 var p2energy = 0;
 
-var alive1 = true;
-var alive2 = true;
+var gamecontinue = false;
 
-function startGame() {
+function decide() {
+    
+    if (p1choice == null || p2choice == null) return;
+    
+    var alive1 = true;
+    var alive2 = true;
+
+    var temp = p1choice;
+    if (p1choice == 15) {
+        p1choice = 0;
+    }else if (p1choice == 16) {
+        p1choice = 1;
+    }
+    p1energy -= p1choice;
+    p1choice = temp;
+    if (p1energy < 0) {
+        alive1 = false;
+    }
+    temp = p2choice;
+    if (p2choice == 15) {
+        p2choice = 0;
+    }else if (p2choice == 16) {
+        p2choice = 1;
+    }
+    p2energy -= p2choice;
+    p2choice = temp;
+    if (p2energy < 0) {
+        alive2 = false;
+    }
+    console.log(p1energy);
+    console.log(p2energy);
+    if (p1choice == 6 && p2choice != 15) {
+        alive2 = false;
+    }
+    else if (p2choice == 6 && p1choice != 16) {
+        alive1 = false;
+    }
+    else if (p1choice == 15 || p1choice == 16) {
+        p1choice = p2choice;
+    }
+    else if (p2choice == 15 || p2choice == 16) {
+        p2choice = p1choice;
+    }
+    else if (p1choice > p2choice) {
+        alive2 = false;
+    }
+    else if (p2choice > p1choice) {
+        alive1 = false;
+    }
+    if (alive1 == alive2) {
+        if (alive1) {
+            gamecontinue = true;
+        }
+        else {
+            console.log('tie');
+        }
+    }
+    else if (!alive1) {
+        player1.send(JSON.stringify({
+            win: false
+        }));
+        player2.send(JSON.stringify({
+            win: true
+        }));
+    }
+    else if (!alive1) {
+        player2.send(JSON.stringify({
+            win: false
+        }));
+        player1.send(JSON.stringify({
+            win: true
+        }));
+    }
+    
+    p1choice = null;
+    p2choice = null;
+    
     round++;
-        player1.send(JSON.stringify({
-            round: 'round ' + round
-        }));
-        player1.send(JSON.stringify({
-            chargeyihao: 'charge ' + p1energy
-        }));
-        player2.send(JSON.stringify({
-            round: 'round ' + round
-        }));
-        player2.send(JSON.stringify({
-            chargeyihao: 'charge ' + p1energy
-        }));
-    gamecontinue = false;
-    player1.on('message', function(message) {
-        p1 = parseInt(JSON.parse(message).value);
-    });
-    player2.on('message', function(message) {
-        p2 = parseInt(JSON.parse(message).value);
-    });
-    setTimeout(function() {
-        var temp = p1;
-        if (p1 == 15) {
-            p1 = 0;
-        }else if (p1 == 16) {
-            p1 = 1;
-        }
-        p1energy -= p1;
-        p1 = temp;
-        if (p1energy < 0) {
-            alive1 = false;
-        }
-        temp = p2;
-        if (p2 == 15) {
-            p2 = 0;
-        }else if (p2 == 16) {
-            p2 = 1;
-        }
-        p2energy -= p2;
-        p2 = temp;
-        if (p2energy < 0) {
-            alive2 = false;
-        }
-        console.log(p1energy);
-        console.log(p2energy);
-        if (p1 == 6 && p2 != 15) {
-            alive2 = false;
-        }
-        else if (p2 == 6 && p1 != 16) {
-            alive1 = false;
-        }
-        else if (p1 == 15 || p1 == 16) {
-            p1 = p2;
-        }
-        else if (p2 == 15 || p2 == 16) {
-            p2 = p1;
-        }
-        else if (p1 > p2) {
-            alive2 = false;
-        }
-        else if (p2 > p1) {
-            alive1 = false;
-        }
-        if (alive1 == alive2) {
-            if (alive1) {
-                gamecontinue = true;
-            }
-            else {
-                console.log('tie');
-            }
-        }
-        else if (!alive1) {
-            player1.send(JSON.stringify({
-                win: false
-            }));
-            player2.send(JSON.stringify({
-                win: true
-            }));
-        }
-        else if (!alive1) {
-            player2.send(JSON.stringify({
-                win: false
-            }));
-            player1.send(JSON.stringify({
-                win: true
-            }));
-        }
-        if (gamecontinue) {
-            startGame();
-        }
-    }, 8000);
+    updateClients();
 }
 
-// var round = 0;
-// wss.on('connection', function(ws) {
-//     if (player1 == null) {
-//         player1 = ws;
-//         ws.send(JSON.stringify({
-//             player: 'Player 1'
-//         }));
-//     }
-//     else if (player2 == null) {
-//         player2 = ws;
-//         ws.send(JSON.stringify({
-//             player: 'Player 2'
-//         }));
-//     }
-//     if (player1 && player2) {
-//         startGame();
-//     }
-// });
+function startGame() {
+    round = 1;
+    p1choice = null;
+    p2choice = null;
+    p1energy = 0;
+    p2energy = 0;
+}
+
+function updateClients() {
+    player1.send(JSON.stringify({
+        round: round,
+        chargeyihao: p1energy
+    }));
+    player2.send(JSON.stringify({
+        round: round,
+        chargeyihao: p2energy
+    }));
+}
+
+function player1Moved(value) {
+    if (!gameStarted) return;
+    if (!p1choice) p1choice = value;
+    decide();
+}
+
+function player2Moved(value) {
+    if (!gameStarted) return;
+    if (!p2choice) p2choice = value;
+    decide();
+}
+
+
+wss.on('connection', function(ws) {
+    
+    if (player1 == null) {
+        player1 = ws;
+        ws.send(JSON.stringify({
+            player: 'Player 1'
+        }));
+        ws.on('message', function(message) {
+            console.log('Player 1 Message', message);
+            player1Moved(parseInt(JSON.parse(message).value));
+        });
+        ws.on('close', function() {
+            console.log('Player 1 Disconnected');
+            player1 = null;
+            gameStarted = false;
+        });
+    }
+    else if (player2 == null) {
+        player2 = ws;
+        ws.send(JSON.stringify({
+            player: 'Player 2'
+        }));
+        ws.on('message', function(message) {
+            console.log('Player 2 Message', message);
+            player2Moved(parseInt(JSON.parse(message).value));
+        });
+        ws.on('close', function() {
+            console.log('Player 2 Disconnected');
+            player1 = null;
+            gameStarted = false;
+        });
+    }
+    if (player1 && player2) {
+        gameStarted = true;
+        startGame();
+        updateClients();
+    }
+});
+
