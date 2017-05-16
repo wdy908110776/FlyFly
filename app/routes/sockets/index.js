@@ -112,21 +112,21 @@ function startGame() {
     }, 8000);
 }
 
-var round = 0;
-wss.on('connection', function(ws) {
-    if (player1 == null) {
-        player1 = ws;
-        ws.send(JSON.stringify({
-            player: 'Player 1'
-        }));
-    }
-    else if (player2 == null) {
-        player2 = ws;
-        ws.send(JSON.stringify({
-            player: 'Player 2'
-        }));
-    }
-    if (player1 && player2) {
-        startGame();
-    }
-});
+// var round = 0;
+// wss.on('connection', function(ws) {
+//     if (player1 == null) {
+//         player1 = ws;
+//         ws.send(JSON.stringify({
+//             player: 'Player 1'
+//         }));
+//     }
+//     else if (player2 == null) {
+//         player2 = ws;
+//         ws.send(JSON.stringify({
+//             player: 'Player 2'
+//         }));
+//     }
+//     if (player1 && player2) {
+//         startGame();
+//     }
+// });

@@ -3,27 +3,61 @@ body {
   background-color: gray;
 }
 
-#player {
-  font-size: 40px;
-  color: blue;
+div {
+  position: relative;
 }
 
-#round {
-  font-size: 40px;
-  color: blue;
+.ocean {
+  background: blue;
+  height: 500px;
+}
+.ocean .player, .ocean .opponent {
+  position: absolute;
+  top: 200px;
+  width: 80px;
+}
+.ocean .player img, .ocean .opponent img {
+  width: 100%;
+}
+.ocean .player {
+  left: 20px;
+}
+.ocean .opponent {
+  right: 20px;
+}
+.ocean h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0px);
 }
 
-#chargeyihao {
-  font-size: 40px;
-  color: blue;
+.floor {
+  padding: 20px;
+  background: yellow;
 }
-
-#countdown {
-  font-size: 40px;
-  color: blue;
+.floor .charges {
+  float: left;
+  width: 15%;
 }
-
-#charge1 {
-  font-size: 40px;
-  color: blue;
+.floor .attacks {
+  float: left;
+  width: 60%;
+  text-align: center;
+}
+.floor .blocks {
+  float: right;
+  width: 25%;
+  text-align: right;
+}
+.floor:after {
+  content: ' ';
+  display: block;
+  clear: both;
+}
+.floor button {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border: 5px solid black;
 }
