@@ -3,17 +3,6 @@ var wss = socket.server;
 
 if (!wss) throw new Error('No WebSocket server');
 
-
-
-
-
-
-
-
-
-
-
-
 var player1 = null;
 var player2 = null;
 var playersWaiting = [];
