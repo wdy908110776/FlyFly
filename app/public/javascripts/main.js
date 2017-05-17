@@ -1,93 +1,133 @@
 var host = document.location.host.replace(/:.*/, '');
-var ws = new WebSocket('wss://' + host);
-console.log('wss://' + host);
-console.log(ws);
-ws.onopen = function() {
-    console.log('open', arguments);
+var ws = null; 
+var gameStarted = false;
+
+function showMenu() {
+    document.querySelector('.menu').style.display = 'block';
 }
-ws.onerror = function() {
-    console.log('error', arguments);
+
+function hideMenu() {
+    document.querySelector('.menu').style.display = 'none';
 }
-ws.onmessage = function(event) {
+
+function socketSend(message) {
+    if (ws && ws.readyState == 1) {
+        ws.send(message);
+    }
+}
+
+function socketOnOpen() {
+    hideMenu();
+}
+
+
+function socketOnError(error) {
+    alert('Error Occurred');
+    showMenu();
+}
+
+
+function socketOnMessage(event) {
+    
     console.log(event.data);
     var data = JSON.parse(event.data);
     if (data.player) {
-        document.querySelector('#player').innerHTML = data.player;
+        document.querySelector('#player-name').innerHTML = data.player;
     }
     if (data.round) {
         document.querySelector('#round').innerHTML = 'Round' + data.round + '\n';
     }
     if (data.chargeyihao) {
-        document.querySelector('#chargeyihao').innerHTML = 'Charge' + data.chargeyihao;
+        document.querySelector('#chargeyihao').innerHTML = 'Charge: ' + data.chargeyihao;
     }
     var countdown = document.querySelector('#countdown');
-    if (data.start) {
-        setTimeout(function() {
-            countdown.innerHTML = 'Pao'
-        }, 1000);
-        setTimeout(function() {
-            countdown.innerHTML = 'Pao'
-        }, 3000);
-        setTimeout(function() {
-            countdown.innerHTML = 'Yun'
-        }, 5000);
-    }
     if (data.tie) {
         countdown.innerHTML = 'IT\'S A TIE';
+        endGame();
     }
     else if (data.win === true) {
         countdown.innerHTML = 'YOU WIN!';
+        endGame();
     }
     else if (data.win === false) {
         countdown.innerHTML = 'YOU LOSE';
+        endGame();
     }
 }
+
+function endGame() {
+   if (ws != null) {
+       ws.close();
+       ws = null;
+   } 
+   showMenu();
+}
+
+function startGame() {
+   endGame();
+   
+   document.querySelector('#countdown').innerHTML = '';
+   document.querySelector('#chargeyihao').innerHTML = '';
+   
+   ws = new WebSocket('wss://' + host);
+   ws.onopen = socketOnOpen;
+   ws.onerror = socketOnError;
+   ws.onmessage = socketOnMessage;
+   ws.onclose = function() {};
+   
+   console.log('wss://' + host);
+   console.log(ws);
+}
+
+window.onbeforeunload = function() {
+    endGame();
+};
+
+document.querySelector('#start').addEventListener('click', startGame);
+
+
 document.querySelector('#charge').onclick = function() {
-    ws.send(JSON.stringify({
+    socketSend(JSON.stringify({
         value: -1
     }));
 }
 document.querySelector('#bubble').onclick = function() {
-    ws.send(JSON.stringify({
+    socketSend(JSON.stringify({
         value: 1
     }));
 }
 document.querySelector('#copperbubble').onclick = function() {
-    ws.send(JSON.stringify({
+    socketSend(JSON.stringify({
         value: 2
     }));
 }
 document.querySelector('#ironbubble').onclick = function() {
-    ws.send(JSON.stringify({
+    socketSend(JSON.stringify({
         value: 3
     }));
 }
 document.querySelector('#goldbubble').onclick = function() {
-    ws.send(JSON.stringify({
+    socketSend(JSON.stringify({
         value: 4
     }));
 }
 document.querySelector('#crystalbubble').onclick = function() {
-    ws.send(JSON.stringify({
+    socketSend(JSON.stringify({
         value: 5
     }));
 }
 document.querySelector('#diamondbubble').onclick = function() {
-    ws.send(JSON.stringify({
+    socketSend(JSON.stringify({
         value: 6
     }));
 }
 document.querySelector('#normal').onclick = function() {
-    ws.send(JSON.stringify({
+    socketSend(JSON.stringify({
         value: 15
     }));
 }
 document.querySelector('#super').onclick = function() {
-    ws.send(JSON.stringify({
+    socketSend(JSON.stringify({
         value: 16
     }));
 }
-window.onbeforeunload = function() {
-    ws.onclose = function() {};
-    ws.close()
-};

@@ -35,6 +35,7 @@ function decide() {
     p1choice = temp;
     if (p1energy < 0) {
         alive1 = false;
+        p1choice = -2;
     }
     temp = p2choice;
     if (p2choice == 15) {
@@ -46,6 +47,7 @@ function decide() {
     p2choice = temp;
     if (p2energy < 0) {
         alive2 = false;
+        p2choice = -2;
     }
     console.log(p1energy);
     console.log(p2energy);
@@ -67,26 +69,37 @@ function decide() {
     else if (p2choice > p1choice) {
         alive1 = false;
     }
+    console.log('1' + alive1);
+    console.log('2' + alive2);
     if (alive1 == alive2) {
         if (alive1) {
             gamecontinue = true;
         }
         else {
-            console.log('tie');
+            player1.send(JSON.stringify({
+                chargeyihao: 'BOOM',
+                tie: true
+            }));
+            player2.send(JSON.stringify({
+                chargeyihao: 'BOOM',
+                tie: true
+            }));
         }
     }
     else if (!alive1) {
         player1.send(JSON.stringify({
             win: false
         }));
+            console.log('2win')
         player2.send(JSON.stringify({
             win: true
         }));
     }
-    else if (!alive1) {
+    else if (!alive2) {
         player2.send(JSON.stringify({
             win: false
         }));
+            console.log('1win')
         player1.send(JSON.stringify({
             win: true
         }));
@@ -159,9 +172,14 @@ wss.on('connection', function(ws) {
         });
         ws.on('close', function() {
             console.log('Player 2 Disconnected');
-            player1 = null;
+            player2 = null;
             gameStarted = false;
         });
+    } else {
+        ws.send(JSON.stringify({
+            full: true
+        }))
+        ws.close();
     }
     if (player1 && player2) {
         gameStarted = true;
