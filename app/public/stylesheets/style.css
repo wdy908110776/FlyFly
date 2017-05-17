@@ -1,6 +1,7 @@
+html,
 body {
-  padding: 50px;
-  background-color: gray;
+  margin: 0px;
+  padding: 0px;
 }
 
 div {
@@ -9,7 +10,8 @@ div {
 
 .ocean {
   background: blue;
-  height: 500px;
+  margin: 0px;
+  height: 90vh;
 }
 .ocean .player, .ocean .opponent {
   position: absolute;
@@ -33,7 +35,7 @@ div {
 }
 
 .floor {
-  padding: 20px;
+  padding: 30px;
   background: yellow;
 }
 .floor .charges {
@@ -56,8 +58,8 @@ div {
   clear: both;
 }
 .floor button {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  border: 5px solid black;
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  border: 5px dotted black;
 }

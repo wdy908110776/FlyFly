@@ -15,7 +15,7 @@ ws.onmessage = function(event) {
         document.querySelector('#player').innerHTML = data.player;
     }
     if (data.round) {
-        document.querySelector('#round').innerHTML = 'Round' + data.round;
+        document.querySelector('#round').innerHTML = 'Round' + data.round + '\n';
     }
     if (data.chargeyihao) {
         document.querySelector('#chargeyihao').innerHTML = 'Charge' + data.chargeyihao;
