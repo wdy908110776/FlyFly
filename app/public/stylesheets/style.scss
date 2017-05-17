@@ -1,7 +1,7 @@
 @import "compass/css3";
 body {
     padding: 50px;
-    background-color: gray;
+    // background-color: gray;
 }
 
 div {
@@ -10,7 +10,8 @@ div {
 
 .ocean {
     background: blue;
-    height: 500px;
+    margin:0px;
+    height: 90vh;
     .player, .opponent {
         position: absolute;
         top: 200px;

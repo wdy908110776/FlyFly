@@ -1,6 +1,5 @@
 body {
   padding: 50px;
-  background-color: gray;
 }
 
 div {
@@ -9,11 +8,12 @@ div {
 
 .ocean {
   background: blue;
-  height: 500px;
+  margin: 0px;
+  height: 90vh;
 }
 .ocean .player, .ocean .opponent {
   position: absolute;
-  top: 200px;
+  top: 40vh;
   width: 80px;
 }
 .ocean .player img, .ocean .opponent img {
@@ -56,8 +56,8 @@ div {
   clear: both;
 }
 .floor button {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
   border: 5px solid black;
 }
