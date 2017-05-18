@@ -11,9 +11,11 @@ div {
 }
 
 .ocean {
-    background: blue;
+    background-image:url("../images/sea.jpg");
+    background-repeat:no-repeat;
+    background-position:center;
     margin:0px;
-    height: 90vh;
+    height: 80vh;
     .player, .opponent {
         position: absolute;
         top: 200px;
@@ -44,7 +46,9 @@ div {
 
 .floor {
     padding: 30px;
-    background: yellow;
+    background-image:url(../images/seafloor.jpg);
+    background-repeat:no-repeat;
+    background-position:center;
     .charges {
         float: left;
         width: 15%;
