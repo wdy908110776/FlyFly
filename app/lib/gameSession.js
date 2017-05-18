@@ -10,6 +10,7 @@ class GameSession {
     }
     startGame() {
         this.round = 1;
+        this.isGameStarted = true;
         for (var p of this.players) {
             p.energy = 0;
         }
@@ -22,7 +23,7 @@ class GameSession {
             })
         }
     }
-    onPlayerMove(player, choice) {
+    onPlayerMove(player) {
         var everyoneMoved = true;
         for (var p of this.players) {
             if (p.didMove() == false) {
@@ -35,13 +36,12 @@ class GameSession {
         }
     }
     addPlayer(player) {
-        console.log('Adding Player', player);
         if (this.players.length < 2 && this.isGameStarted == false) {
             this.players.push(player);
             this.numberOfPlayers = this.players.length;
             
             player.onMove = this.onPlayerMove.bind(this);
-            player.sendMessage({ player: 'Player ' +this.numberOfPlayers });
+            player.sendMessage({ player: 'Player ' + this.numberOfPlayers });
         }
         if (this.numberOfPlayers == 2) {
             this.startGame();
@@ -49,6 +49,15 @@ class GameSession {
     }
 
     decide() {
+        
+        var p1 = this.players[0];
+        var p2 = this.players[1];
+
+        var p1choice = p1.choice;
+        var p2choice = p2.choice;
+        
+        var p1energy = p1.energy;
+        var p2energy = p2.energy;
         
         if (p1choice == null || p2choice == null) return;
         
@@ -81,6 +90,8 @@ class GameSession {
         }
         console.log(p1energy);
         console.log(p2energy);
+        
+        
         if (p1choice == 6 && p2choice != 15) {
             alive2 = false;
         }
@@ -101,45 +112,22 @@ class GameSession {
         }
         console.log('1' + alive1);
         console.log('2' + alive2);
-        if (alive1 == alive2) {
-            if (alive1) {
-                gamecontinue = true;
-            }
-            else {
-                player1.send(JSON.stringify({
-                    chargeyihao: 'BOOM',
-                    tie: true
-                }));
-                player2.send(JSON.stringify({
-                    chargeyihao: 'BOOM',
-                    tie: true
-                }));
-            }
-        }
-        else if (!alive1) {
-            player1.send(JSON.stringify({
-                win: false
-            }));
-                console.log('2win')
-            player2.send(JSON.stringify({
-                win: true
-            }));
-        }
-        else if (!alive2) {
-            player2.send(JSON.stringify({
-                win: false
-            }));
-                console.log('1win')
-            player1.send(JSON.stringify({
-                win: true
-            }));
-        }
         
-        p1choice = null;
-        p2choice = null;
-        
-        round++;
-        // updateClients();
+        p1.choice = null;
+        p2.choice = null;
+        p1.energy = p1energy;
+        p2.energy = p1energy;
+
+        if (alive1 && alive2) {
+            this.round++;
+            this.updatePlayers();
+        } else if (!alive1) {
+            p1.sendMessage({ win: false });
+            p2.sendMessage({ win: true });
+        } else if (!alive2) {
+            p1.sendMessage({ win: true });
+            p2.sendMessage({ win: false });
+        }
     }
 }
 

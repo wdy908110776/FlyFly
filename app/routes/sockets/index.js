@@ -24,7 +24,9 @@ function onConnection(socket) {
     } else {
         var newSession = new GameSession();
         newSession.addPlayer(newPlayer);
+        sessions.push(newSession);
     }
+    console.log(sessions);
 }
 
 wss.on('connection', onConnection);
