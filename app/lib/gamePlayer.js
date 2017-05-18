@@ -10,6 +10,9 @@ class GamePlayer {
         this.socket.on('message', this.onSocketMessage.bind(this));
         this.onMove = function(){};
     }
+    didMove() {
+        return this.choice != null;
+    }
     sendMessage(message) {
         if (this.socket && this.socket.readyState == 1) {
             this.socket.send(JSON.stringify(message));
@@ -17,7 +20,8 @@ class GamePlayer {
     }
     onSocketMessage(message) {
         console.log('Player 1 Message', message);
-        this.onMove(this, parseInt(JSON.parse(message).value));
+        this.choice = parseInt(JSON.parse(message).value);
+        this.onMove(this);
     }
     onSocketClose() {
         console.log('Player 1 Disconnected');
