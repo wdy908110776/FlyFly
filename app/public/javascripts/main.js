@@ -32,7 +32,8 @@ function socketOnMessage(event) {
     console.log(event.data);
     var data = JSON.parse(event.data);
     if (data.player) {
-        document.querySelector('#player-name').innerHTML = data.player;
+        document.querySelector('#player-name').innerHTML = data.player + '(you)';
+        document.querySelector('#opponent-name').innerHTML = 'opponent';
     }
     if (data.round) {
         document.querySelector('#round').innerHTML = 'Round' + data.round + '\n';
