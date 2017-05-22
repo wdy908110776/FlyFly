@@ -1,9 +1,18 @@
 @import "compass/css3";
+@import "normalize";
+
 html,
 body {
     margin: 0px;
     padding: 0px;
-    // background-color: gray;
+    background-image:url(../images/KakaisAlexsSon.jpg);
+    background-size:cover;
+    background-repeat:no-repeat;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 div {
@@ -11,12 +20,11 @@ div {
 }
 
 .ocean {
-    background: blue;
     margin:0px;
-    height: 90vh;
+    height: 80vh;
     .player, .opponent {
         position: absolute;
-        top: 200px;
+        top: 50%;
         width: 80px;
         img {
             width: 100%;
@@ -30,25 +38,33 @@ div {
     }
     h1 {
         position: absolute;
-        top: 50%;
+        top: 15%;
         left: 50%;
         transform: translate3d(-50%, -50%, 0px);
     }
+    h2{
+        position:absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate3d(-50%,-50%, 0px);
+    }
     h3{
         position:absolute;
-        top:30%;
-        left:50%;
+        top: 25%;
+        left: 50%;
         transform:translate3d(-50%,-50%,0px);
     }
 }
 
 .floor {
+    height: 15vh;
     padding: 30px;
-    background: yellow;
     .charges {
+        display:inline-block;
         float: left;
         width: 15%;
-    }
+        }
+    
     .attacks {
         float: left;
         width: 60%;
