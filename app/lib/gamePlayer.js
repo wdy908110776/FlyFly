@@ -19,9 +19,11 @@ class GamePlayer {
         } 
     }
     onSocketMessage(message) {
-        console.log('Player 1 Message', message);
-        this.choice = parseInt(JSON.parse(message).value);
-        this.onMove(this);
+        if (this.choice == null) {
+            console.log('Player 1 Message', message);
+            this.choice = parseInt(JSON.parse(message).value);
+            this.onMove(this);
+        }
     }
     onSocketClose() {
         console.log('Player 1 Disconnected');

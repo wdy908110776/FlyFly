@@ -8,13 +8,6 @@ class GameSession {
         this.numberOfPlayers = 0;
         this.players = [];
     }
-    startGame() {
-        this.round = 1;
-        this.isGameStarted = true;
-        for (var p of this.players) {
-            p.energy = 0;
-        }
-    }
     updatePlayers() {
         for (var p of this.players) {
             p.sendMessage({
@@ -22,6 +15,15 @@ class GameSession {
                 chargeyihao: p.energy
             })
         }
+        console.log('round' + this.round);
+    }
+    startGame() {
+        this.round = 1;
+        this.isGameStarted = true;
+        for (var p of this.players) {
+            p.energy = 0;
+        }
+        this.updatePlayers();
     }
     onPlayerMove(player) {
         var everyoneMoved = true;
@@ -49,7 +51,6 @@ class GameSession {
     }
 
     decide() {
-        
         var p1 = this.players[0];
         var p2 = this.players[1];
 
@@ -116,7 +117,7 @@ class GameSession {
         p1.choice = null;
         p2.choice = null;
         p1.energy = p1energy;
-        p2.energy = p1energy;
+        p2.energy = p2energy;
 
         if (alive1 && alive2) {
             this.round++;
