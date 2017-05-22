@@ -127,6 +127,9 @@ class GameSession {
         } else if (!alive2) {
             p1.sendMessage({ win: true });
             p2.sendMessage({ win: false });
+        } else if (!alive1 && !alive2) {
+            p1.sendMessage({ tie: true });
+            p2.sendMessage({ tie: false });
         }
     }
 }
