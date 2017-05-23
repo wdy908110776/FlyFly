@@ -107,7 +107,7 @@ document.querySelector('#bubble').onclick = function() {
     bubble.classList.add('rtl');
     bubble.innerHTML = 'BUBBLE';
     bubbleTrack.appendChild(bubble);
-    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 10000);
 }
 document.querySelector('#copperbubble').onclick = function() {
     socketSend(JSON.stringify({

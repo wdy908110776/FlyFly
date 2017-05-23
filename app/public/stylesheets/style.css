@@ -477,11 +477,12 @@ div {
   background-image: url(../images/bubble.png);
 }
 .bubble-track .bubble.copper {
-  background-image: url(../images/fish.jpg);
+  background-image: url(../images/bubble.png);
+  background-color: orange;
 }
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
-  animation-duration: 1s;
+  animation-duration: 10s;
   animation-timing-function: linear;
 }
 

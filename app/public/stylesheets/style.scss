@@ -45,11 +45,28 @@ div {
         border-radius: 35px;
         background-image:url(../images/bubble.png);
         &.copper {
-            background-image:url(../images/fish.jpg);
+            background-image:url(../images/bubble.png);
+            background-color:orange;
+        }
+        &.iron {
+            background-image:url(../images/bubble.png);
+            background-color:gray;
+        }
+        &.gold {
+            background-image:url(../images/bubble.png);
+            background-color:gold;
+        }
+        &.crystal {
+            background-image:url(../images/bubble.png);
+            background-color:lavender;
+        }
+        &.diamond {
+            background-image:url(../images/bubble.png);
+            background-color:lightskyblue;
         }
         &.rtl {
             animation-name: right-to-left;
-            animation-duration: 1s;
+            animation-duration: 10s;
             animation-timing-function: linear;
         }
     }
