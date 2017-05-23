@@ -19,6 +19,42 @@ div {
     position: relative;
 }
 
+@keyframes right-to-left {
+    0% {
+        left: calc(0%);
+        transform: rotateZ(0deg);
+    }
+    50% {
+        transform: rotateZ(540deg) scale(2);
+    }
+    100% {
+        left: calc(100% - 70px);
+        transform: rotateZ(1080deg);
+    }
+}
+
+.bubble-track {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 80px;
+    .bubble {
+        position: absolute;
+        width: 70px;
+        height: 70px;
+        border-radius: 35px;
+        background-image:url(../images/bubble.png);
+        &.copper {
+            background-image:url(../images/fish.jpg);
+        }
+        &.rtl {
+            animation-name: right-to-left;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+        }
+    }
+}
+
 .ocean {
     margin:0px;
     height: 80vh;

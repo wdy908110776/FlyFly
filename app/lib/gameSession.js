@@ -14,14 +14,19 @@ class GameSession {
                 round: this.round,
                 chargeyihao: p.energy
             })
+            // if (!p.energy) {
+            //     chargeyihao: 'zero'
+            // }
         }
-        console.log('round' + this.round);
     }
     startGame() {
-        this.round = 1;
+        this.round = 1;                
         this.isGameStarted = true;
         for (var p of this.players) {
             p.energy = 0;
+            p.sendMessage({
+                chargeyihao: parseInt(p.energy)
+            })
         }
         this.updatePlayers();
     }
@@ -91,7 +96,6 @@ class GameSession {
         }
         console.log(p1energy);
         console.log(p2energy);
-        
         
         if (p1choice == 6 && p2choice != 15) {
             alive2 = false;

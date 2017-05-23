@@ -1,6 +1,7 @@
 var host = document.location.host.replace(/:.*/, '');
 var ws = null; 
 var gameStarted = false;
+var bubbleTrack = document.querySelector('.bubble-track');
 
 function showMenu() {
     document.querySelector('.menu').style.display = 'block';
@@ -38,9 +39,10 @@ function socketOnMessage(event) {
     if (data.round) {
         document.querySelector('#round').innerHTML = 'Round' + data.round + '\n';
     }
-    if (data.chargeyihao) {
+    if (data.chargeyihao != undefined) {
         document.querySelector('#chargeyihao').innerHTML = 'Charge: ' + data.chargeyihao;
     }
+    // if (data.selftype == bubble) {
     var countdown = document.querySelector('#countdown');
     if (data.tie) {
         countdown.innerHTML = 'IT\'S A TIE';
@@ -69,6 +71,8 @@ function startGame() {
    
    document.querySelector('#countdown').innerHTML = '';
    document.querySelector('#chargeyihao').innerHTML = '';
+   document.querySelector('#bubbleimg').innerHTML = '';
+   document.querySelector('#shield').innerHTML = '';
    
    ws = new WebSocket('wss://' + host);
    ws.onopen = socketOnOpen;
@@ -89,46 +93,62 @@ document.querySelector('#start').addEventListener('click', startGame);
 
 document.querySelector('#charge').onclick = function() {
     socketSend(JSON.stringify({
-        value: -1
+        value: -1,
+        type:'charge'
     }));
 }
 document.querySelector('#bubble').onclick = function() {
-    socketSend(JSON.stringify({
-        value: 1
-    }));
+    // socketSend(JSON.stringify({
+    //     value: 1,
+    //     type:'bubble'
+    // }));
+    var bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+    bubble.classList.add('copper');
+    bubble.classList.add('rtl');
+    bubble.innerHTML = 'BUBBLE';
+    bubbleTrack.appendChild(bubble);
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
 }
 document.querySelector('#copperbubble').onclick = function() {
     socketSend(JSON.stringify({
-        value: 2
+        value: 2,
+        type:'bubble'
     }));
 }
 document.querySelector('#ironbubble').onclick = function() {
     socketSend(JSON.stringify({
-        value: 3
+        value: 3,
+        type:'bubble'
     }));
 }
 document.querySelector('#goldbubble').onclick = function() {
     socketSend(JSON.stringify({
-        value: 4
+        value: 4,
+        type:'bubble'
     }));
 }
 document.querySelector('#crystalbubble').onclick = function() {
     socketSend(JSON.stringify({
-        value: 5
+        value: 5,
+        type:'bubble'
     }));
 }
 document.querySelector('#diamondbubble').onclick = function() {
     socketSend(JSON.stringify({
-        value: 6
+        value: 6,
+        type:'bubble'
     }));
 }
 document.querySelector('#normal').onclick = function() {
     socketSend(JSON.stringify({
-        value: 15
+        value: 15,
+        type:'shield'
     }));
 }
 document.querySelector('#super').onclick = function() {
     socketSend(JSON.stringify({
-        value: 16
+        value: 16,
+        type:'shield'
     }));
 }

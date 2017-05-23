@@ -22,6 +22,7 @@ class GamePlayer {
         if (this.choice == null) {
             console.log('Player 1 Message', message);
             this.choice = parseInt(JSON.parse(message).value);
+            this.choicetype = parseInt(JSON.parse(message).type);
             this.onMove(this);
         }
     }
