@@ -2,7 +2,16 @@ var host = document.location.host.replace(/:.*/, '');
 var ws = null; 
 var gameStarted = false;
 var bubbleTrack = document.querySelector('.bubble-track');
-var bubble = document.createElement('div');
+function addBubble(a, b) { 
+    var bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+    bubble.classList.add(a);
+    bubble.classList.add('rtl');
+    bubble.innerHTML = b;
+    bubbleTrack.appendChild(bubble); 
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 10000);
+
+}
 
 function showMenu() {
     document.querySelector('.menu').style.display = 'block';
@@ -103,56 +112,38 @@ document.querySelector('#bubble').onclick = function() {
         value: 1,
         type:'bubble'
     }));
-    bubble.classList.add('bubble');
-    bubble.classList.add('rtl');
-    bubble.innerHTML = 'BUBBLE';
-    bubbleTrack.appendChild(bubble);
-    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 10000);
+    addBubble('bubble', 'BUBBLE');
 }
 document.querySelector('#copperbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 2,
-        bubble.classList.add('copper');
-        bubble.classList.add('rtl');
-        bubble.innerHTML = 'COPPER';
-        bubbleTrack.appendChild(bubble);
     }));
+    addBubble('copper', 'COPPER');
+
 }
 document.querySelector('#ironbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 3,
-        bubble.classList.add('iron');
-        bubble.classList.add('rtl');
-        bubble.innerHTML = 'IRON';
-        bubbleTrack.appendChild(bubble);
     }));
+    addBubble('iron', 'IRON');
 }
 document.querySelector('#goldbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 4,
-        bubble.classList.add('gold');
-        bubble.classList.add('rtl');
-        bubble.innerHTML = 'GOLD';
-        bubbleTrack.appendChild(bubble);    
     }));
+    addBubble('gold', 'GOLD');
 }
 document.querySelector('#crystalbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 5,
-        bubble.classList.add('crystal');
-        bubble.classList.add('rtl');
-        bubble.innerHTML = 'CRYSTAL';
-        bubbleTrack.appendChild(bubble);   
     }));
+    addBubble('crystal', 'CRYSTAL');
 }
 document.querySelector('#diamondbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 6,
-        bubble.classList.add('diamond');
-        bubble.classList.add('rtl');
-        bubble.innerHTML = 'DIAMOND';
-        bubbleTrack.appendChild(bubble);   
     }));
+    addBubble('diamond', 'DIAMOND');
 }
 document.querySelector('#normal').onclick = function() {
     socketSend(JSON.stringify({

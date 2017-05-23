@@ -22,14 +22,14 @@ div {
 @keyframes right-to-left {
     0% {
         left: calc(0%);
-        transform: rotateZ(0deg);
+        // transform: rotateZ(0deg);
     }
     50% {
-        transform: rotateZ(540deg) scale(2);
+        // transform: rotateZ(540deg) scale(2);
     }
     100% {
         left: calc(100% - 70px);
-        transform: rotateZ(1080deg);
+        // transform: rotateZ(1080deg);
     }
 }
 
@@ -44,25 +44,21 @@ div {
         height: 70px;
         border-radius: 35px;
         background-image:url(../images/bubble.png);
+        background-color:white;
         &.copper {
-            background-image:url(../images/bubble.png);
-            background-color:orange;
+            background-color: orange;
         }
         &.iron {
-            background-image:url(../images/bubble.png);
-            background-color:gray;
+            background-color: gray;
         }
         &.gold {
-            background-image:url(../images/bubble.png);
-            background-color:gold;
+            background-color: gold;
         }
         &.crystal {
-            background-image:url(../images/bubble.png);
-            background-color:lavender;
+            background-color: violet;
         }
         &.diamond {
-            background-image:url(../images/bubble.png);
-            background-color:lightskyblue;
+            background-color: lightskyblue;
         }
         &.rtl {
             animation-name: right-to-left;
