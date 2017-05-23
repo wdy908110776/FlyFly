@@ -88,6 +88,7 @@ div {
         position:absolute;
         top: 25%;
         left: 50%;
+        font-size: 300%;
         transform:translate3d(-50%,-50%,0px);
     }
 }
@@ -104,7 +105,7 @@ div {
     .attacks {
         float: left;
         width: 60%;
-        text-align: center;
+        left: 23%;
     }
     .blocks {
         float: right;
@@ -127,13 +128,16 @@ div {
 .menu {
     background-color: skyblue;
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     width: 400px;
-    height: 200px;
+    height: 275px;
     transform: translate3d(-200px, -100px, 0px);
     padding: 20px;
     text-align: center;
+    img{
+        width:100%;
+    }
     .title {
         font-size: 80px;
     }
