@@ -2,6 +2,7 @@ var host = document.location.host.replace(/:.*/, '');
 var ws = null; 
 var gameStarted = false;
 var bubbleTrack = document.querySelector('.bubble-track');
+var bubble = document.createElement('div');
 
 function showMenu() {
     document.querySelector('.menu').style.display = 'block';
@@ -98,13 +99,11 @@ document.querySelector('#charge').onclick = function() {
     }));
 }
 document.querySelector('#bubble').onclick = function() {
-    // socketSend(JSON.stringify({
-    //     value: 1,
-    //     type:'bubble'
-    // }));
-    var bubble = document.createElement('div');
+    socketSend(JSON.stringify({
+        value: 1,
+        type:'bubble'
+    }));
     bubble.classList.add('bubble');
-    bubble.classList.add('copper');
     bubble.classList.add('rtl');
     bubble.innerHTML = 'BUBBLE';
     bubbleTrack.appendChild(bubble);
@@ -113,31 +112,46 @@ document.querySelector('#bubble').onclick = function() {
 document.querySelector('#copperbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 2,
-        type:'bubble'
+        bubble.classList.add('copper');
+        bubble.classList.add('rtl');
+        bubble.innerHTML = 'COPPER';
+        bubbleTrack.appendChild(bubble);
     }));
 }
 document.querySelector('#ironbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 3,
-        type:'bubble'
+        bubble.classList.add('iron');
+        bubble.classList.add('rtl');
+        bubble.innerHTML = 'IRON';
+        bubbleTrack.appendChild(bubble);
     }));
 }
 document.querySelector('#goldbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 4,
-        type:'bubble'
+        bubble.classList.add('gold');
+        bubble.classList.add('rtl');
+        bubble.innerHTML = 'GOLD';
+        bubbleTrack.appendChild(bubble);    
     }));
 }
 document.querySelector('#crystalbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 5,
-        type:'bubble'
+        bubble.classList.add('crystal');
+        bubble.classList.add('rtl');
+        bubble.innerHTML = 'CRYSTAL';
+        bubbleTrack.appendChild(bubble);   
     }));
 }
 document.querySelector('#diamondbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 6,
-        type:'bubble'
+        bubble.classList.add('diamond');
+        bubble.classList.add('rtl');
+        bubble.innerHTML = 'DIAMOND';
+        bubbleTrack.appendChild(bubble);   
     }));
 }
 document.querySelector('#normal').onclick = function() {
