@@ -455,7 +455,7 @@ div {
     left: calc(0%);
   }
   100% {
-    left: calc(100% - 70px);
+    left: calc(50% - 70px);
   }
 }
 .bubble-track {
@@ -489,7 +489,7 @@ div {
 }
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
-  animation-duration: 10s;
+  animation-duration: 5s;
   animation-timing-function: linear;
 }
 
