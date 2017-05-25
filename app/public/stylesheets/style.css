@@ -452,7 +452,7 @@ div {
 
 @keyframes right-to-left {
   0% {
-    left: calc(0%);
+    left: calc(0% + 80px);
   }
   100% {
     left: calc(50% - 35px);
@@ -464,6 +464,17 @@ div {
   }
   100% {
     left: calc(50% - 35px);
+  }
+}
+@keyframes bigger {
+  0% {
+    left: calc(0%);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    left: calc(0%);
   }
 }
 .bubble-track {
@@ -497,8 +508,13 @@ div {
 }
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
+<<<<<<< HEAD
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+=======
   animation-duration: 5s;
   animation-timing-function: linear;
+>>>>>>> 4cb5594b664c5a680956d14c9d73e5e99f6c0cb0
 }
 .bubble-track .bubble.ltr {
   animation-name: left-to-right;

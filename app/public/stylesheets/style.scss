@@ -21,7 +21,7 @@ div {
 
 @keyframes right-to-left {
     0% {
-        left: calc(0%);
+        left: calc(0% + 80px);
         // transform: rotateZ(0deg);
     }
     50% {
@@ -44,6 +44,19 @@ div {
     100% {
         left: calc(50% - 35px);
         // transform: rotateZ(1080deg);
+    }
+}
+
+
+@keyframes bigger{
+    0%{
+        left:calc(0%);
+    }
+    50%{
+        transform:scale(2);
+    }
+    100%{
+        left:calc(0%);
     }
 }
 
@@ -76,8 +89,8 @@ div {
         }
         &.rtl {
             animation-name: right-to-left;
-            animation-duration: 5s;
-            animation-timing-function: linear;
+            animation-duration: 1s;
+            animation-timing-function: ease-in;
         }
         &.ltr {
             animation-name: left-to-right;

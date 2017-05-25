@@ -9,7 +9,11 @@ function addBubble(a, b) {
     bubble.classList.add('rtl');
     bubble.innerHTML = b;
     bubbleTrack.appendChild(bubble); 
+<<<<<<< HEAD
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
+=======
     setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
+>>>>>>> 4cb5594b664c5a680956d14c9d73e5e99f6c0cb0
 
 }
 function addOpponentBubble(a, b) { 
