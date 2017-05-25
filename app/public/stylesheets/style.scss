@@ -28,7 +28,21 @@ div {
         // transform: rotateZ(540deg) scale(2);
     }
     100% {
-        left: calc(50% - 70px);
+        left: calc(50% - 35px);
+        // transform: rotateZ(1080deg);
+    }
+}
+
+@keyframes left-to-right {
+    0% {
+        right: calc(0%);
+        // transform: rotateZ(0deg);
+    }
+    50% {
+        // transform: rotateZ(540deg) scale(2);
+    }
+    100% {
+        left: calc(50% - 35px);
         // transform: rotateZ(1080deg);
     }
 }
@@ -77,6 +91,11 @@ div {
             animation-name: right-to-left;
             animation-duration: 1s;
             animation-timing-function: ease-in;
+        }
+        &.ltr {
+            animation-name: left-to-right;
+            animation-duration: 5s;
+            animation-timing-function: linear;
         }
     }
 }

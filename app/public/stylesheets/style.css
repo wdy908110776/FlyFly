@@ -455,7 +455,15 @@ div {
     left: calc(0% + 80px);
   }
   100% {
-    left: calc(50% - 70px);
+    left: calc(50% - 35px);
+  }
+}
+@keyframes left-to-right {
+  0% {
+    right: calc(0%);
+  }
+  100% {
+    left: calc(50% - 35px);
   }
 }
 @keyframes getbigger {
@@ -514,6 +522,11 @@ div {
 .bigger.getsbigger {
   animation-name: getbigger;
   animation-duration: 1s;
+  animation-timing-function: linear;
+}
+.bubble-track .bubble.ltr {
+  animation-name: left-to-right;
+  animation-duration: 5s;
   animation-timing-function: linear;
 }
 
