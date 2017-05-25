@@ -12,6 +12,16 @@ function addBubble(a, b) {
     setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
 
 }
+function addOpponentBubble(a, b) { 
+    var bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+    bubble.classList.add(a);
+    bubble.classList.add('ltr');
+    bubble.innerHTML = b;
+    bubbleTrack.appendChild(bubble); 
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
+
+}
 
 function showMenu() {
     document.querySelector('.menu').style.display = 'block';
@@ -51,6 +61,10 @@ function socketOnMessage(event) {
     }
     if (data.chargeyihao != undefined) {
         document.querySelector('#chargeyihao').innerHTML = 'Charge: ' + data.chargeyihao;
+    }
+    if (data.opponenta && data.opponentb) {
+        oa = data.opponenta;
+        ob = data.opponentb;
     }
     // if (data.selftype == bubble) {
     var countdown = document.querySelector('#countdown');
@@ -115,7 +129,6 @@ document.querySelector('#charge').onclick = function() {
 document.querySelector('#bubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 1,
-        type:'bubble'
     }));
     addBubble('bubble', 'BUBBLE');
 }
@@ -124,7 +137,6 @@ document.querySelector('#copperbubble').onclick = function() {
         value: 2,
     }));
     addBubble('copper', 'COPPER');
-
 }
 document.querySelector('#ironbubble').onclick = function() {
     socketSend(JSON.stringify({

@@ -455,7 +455,15 @@ div {
     left: calc(0%);
   }
   100% {
-    left: calc(50% - 70px);
+    left: calc(50% - 35px);
+  }
+}
+@keyframes left-to-right {
+  0% {
+    right: calc(0%);
+  }
+  100% {
+    left: calc(50% - 35px);
   }
 }
 .bubble-track {
@@ -489,6 +497,11 @@ div {
 }
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+}
+.bubble-track .bubble.ltr {
+  animation-name: left-to-right;
   animation-duration: 5s;
   animation-timing-function: linear;
 }

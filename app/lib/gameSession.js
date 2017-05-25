@@ -126,15 +126,15 @@ class GameSession {
         if (alive1 && alive2) {
             this.round++;
             this.updatePlayers();
+        } else if (!alive1 && !alive2) {
+            p1.sendMessage({ tie: true });
+            p2.sendMessage({ tie: true });
         } else if (!alive1) {
             p1.sendMessage({ win: false });
             p2.sendMessage({ win: true });
         } else if (!alive2) {
             p1.sendMessage({ win: true });
             p2.sendMessage({ win: false });
-        } else if (!alive1 && !alive2) {
-            p1.sendMessage({ tie: true });
-            p2.sendMessage({ tie: false });
         }
     }
 }
