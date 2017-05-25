@@ -452,15 +452,21 @@ div {
 
 @keyframes right-to-left {
   0% {
-    left: calc(0%);
-    transform: rotateZ(0deg);
-  }
-  50% {
-    transform: rotateZ(540deg) scale(2);
+    left: calc(0% + 80px);
   }
   100% {
     left: calc(100% - 70px);
-    transform: rotateZ(1080deg);
+  }
+}
+@keyframes bigger {
+  0% {
+    left: calc(0%);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    left: calc(0%);
   }
 }
 .bubble-track {
@@ -475,31 +481,27 @@ div {
   height: 70px;
   border-radius: 35px;
   background-image: url(../images/bubble.png);
+  background-color: white;
 }
 .bubble-track .bubble.copper {
-  background-image: url(../images/bubble.png);
   background-color: orange;
 }
 .bubble-track .bubble.iron {
-  background-image: url(../images/bubble.png);
   background-color: gray;
 }
 .bubble-track .bubble.gold {
-  background-image: url(../images/bubble.png);
   background-color: gold;
 }
 .bubble-track .bubble.crystal {
-  background-image: url(../images/bubble.png);
-  background-color: lavender;
+  background-color: violet;
 }
 .bubble-track .bubble.diamond {
-  background-image: url(../images/bubble.png);
   background-color: lightskyblue;
 }
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
-  animation-duration: 10s;
-  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
 }
 
 .ocean {
