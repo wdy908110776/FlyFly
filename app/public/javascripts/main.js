@@ -33,6 +33,16 @@ function addOpponentBubble(a, b) {
     setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
 
 }
+function addOpponentBubble(a, b) { 
+    var bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+    bubble.classList.add(a);
+    bubble.classList.add('ltr');
+    bubble.innerHTML = b;
+    bubbleTrack.appendChild(bubble); 
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
+
+}
 
 function showMenu() {
     document.querySelector('.menu').style.display = 'block';
