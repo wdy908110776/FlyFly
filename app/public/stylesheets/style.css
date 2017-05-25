@@ -480,6 +480,22 @@ div {
   background-image: url(../images/bubble.png);
   background-color: orange;
 }
+.bubble-track .bubble.iron {
+  background-image: url(../images/bubble.png);
+  background-color: gray;
+}
+.bubble-track .bubble.gold {
+  background-image: url(../images/bubble.png);
+  background-color: gold;
+}
+.bubble-track .bubble.crystal {
+  background-image: url(../images/bubble.png);
+  background-color: lavender;
+}
+.bubble-track .bubble.diamond {
+  background-image: url(../images/bubble.png);
+  background-color: lightskyblue;
+}
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
   animation-duration: 10s;
