@@ -458,7 +458,7 @@ div {
     left: calc(50% - 70px);
   }
 }
-@keyframes bigger {
+@keyframes getbigger {
   0% {
     left: calc(0%);
   }
@@ -500,13 +500,21 @@ div {
 }
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
-<<<<<<< HEAD
   animation-duration: 1s;
   animation-timing-function: ease-in;
-=======
-  animation-duration: 5s;
+}
+
+.bigger {
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  left: 20px;
+  background-image: url(../images/player-idle.jpg);
+}
+.bigger.getsbigger {
+  animation-name: getbigger;
+  animation-duration: 1s;
   animation-timing-function: linear;
->>>>>>> 4cb5594b664c5a680956d14c9d73e5e99f6c0cb0
 }
 
 .ocean {

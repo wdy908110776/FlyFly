@@ -2,6 +2,7 @@ var host = document.location.host.replace(/:.*/, '');
 var ws = null; 
 var gameStarted = false;
 var bubbleTrack = document.querySelector('.bubble-track');
+var bigger = document.querySelector('.bigger')
 function addBubble(a, b) { 
     var bubble = document.createElement('div');
     bubble.classList.add('bubble');
@@ -9,12 +10,18 @@ function addBubble(a, b) {
     bubble.classList.add('rtl');
     bubble.innerHTML = b;
     bubbleTrack.appendChild(bubble); 
-<<<<<<< HEAD
     setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
-=======
-    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
->>>>>>> 4cb5594b664c5a680956d14c9d73e5e99f6c0cb0
 
+
+function becomebigger(mira,mira2){
+    var Bbigger= document.createElement('bigMira');
+    Bbigger.classList.add('charge');
+    Bbigger.classList.add(mira);
+    Bbigger.classList.add('gitsbigger');
+    Bbigger.innerHTML = mira;
+    bigger,appendChild(mira);
+    setTimeout(function() { bigger.removeChild(mira);},1000)
+    
 }
 
 function showMenu() {
@@ -115,6 +122,7 @@ document.querySelector('#charge').onclick = function() {
     socketSend(JSON.stringify({
         value: -1,
     }));
+    becomebigger('charge','Miras')
 }
 document.querySelector('#bubble').onclick = function() {
     socketSend(JSON.stringify({

@@ -34,7 +34,7 @@ div {
 }
 
 
-@keyframes bigger{
+@keyframes getbigger{
     0%{
         left:calc(0%);
     }
@@ -80,6 +80,30 @@ div {
         }
     }
 }
+
+.bigger{
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    left: 20px;
+    background-image:url(../images/player-idle.jpg);
+    &.getsbigger{
+        animation-name: getbigger;
+        animation-duration: 1s;
+        animation-timing-function:linear;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .ocean {
     margin:0px;
