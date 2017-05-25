@@ -9,7 +9,11 @@ function addBubble(a, b) {
     bubble.classList.add('rtl');
     bubble.innerHTML = b;
     bubbleTrack.appendChild(bubble); 
+<<<<<<< HEAD
     setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
+=======
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
+>>>>>>> 4cb5594b664c5a680956d14c9d73e5e99f6c0cb0
 
 }
 
@@ -56,15 +60,21 @@ function socketOnMessage(event) {
     var countdown = document.querySelector('#countdown');
     if (data.tie) {
         countdown.innerHTML = 'IT\'S A TIE';
-        endGame();
+        setTimeout(function() {
+            endGame();
+        }, 5000)
     }
     else if (data.win === true) {
         countdown.innerHTML = 'YOU WIN!';
-        endGame();
+        setTimeout(function() {
+            endGame();
+        }, 5000)();
     }
     else if (data.win === false) {
         countdown.innerHTML = 'YOU LOSE';
-        endGame();
+        setTimeout(function() {
+            endGame();
+        }, 5000)
     }
 }
 
@@ -81,8 +91,8 @@ function startGame() {
    
    document.querySelector('#countdown').innerHTML = '';
    document.querySelector('#chargeyihao').innerHTML = '';
-   document.querySelector('#bubbleimg').innerHTML = '';
-   document.querySelector('#shield').innerHTML = '';
+//   document.querySelector('#bubbleimg').innerHTML = '';
+//   document.querySelector('#shield').innerHTML = '';
    
    ws = new WebSocket('wss://' + host);
    ws.onopen = socketOnOpen;
@@ -104,7 +114,6 @@ document.querySelector('#start').addEventListener('click', startGame);
 document.querySelector('#charge').onclick = function() {
     socketSend(JSON.stringify({
         value: -1,
-        type:'charge'
     }));
 }
 document.querySelector('#bubble').onclick = function() {
@@ -148,12 +157,10 @@ document.querySelector('#diamondbubble').onclick = function() {
 document.querySelector('#normal').onclick = function() {
     socketSend(JSON.stringify({
         value: 15,
-        type:'shield'
     }));
 }
 document.querySelector('#super').onclick = function() {
     socketSend(JSON.stringify({
         value: 16,
-        type:'shield'
     }));
 }

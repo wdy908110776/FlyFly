@@ -455,7 +455,7 @@ div {
     left: calc(0% + 80px);
   }
   100% {
-    left: calc(100% - 70px);
+    left: calc(50% - 70px);
   }
 }
 @keyframes bigger {
@@ -500,8 +500,13 @@ div {
 }
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
+<<<<<<< HEAD
   animation-duration: 1s;
   animation-timing-function: ease-in;
+=======
+  animation-duration: 5s;
+  animation-timing-function: linear;
+>>>>>>> 4cb5594b664c5a680956d14c9d73e5e99f6c0cb0
 }
 
 .ocean {

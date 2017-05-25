@@ -28,7 +28,7 @@ div {
         // transform: rotateZ(540deg) scale(2);
     }
     100% {
-        left: calc(100% - 70px);
+        left: calc(50% - 70px);
         // transform: rotateZ(1080deg);
     }
 }
@@ -77,7 +77,6 @@ div {
             animation-name: right-to-left;
             animation-duration: 1s;
             animation-timing-function: ease-in;
-            
         }
     }
 }
