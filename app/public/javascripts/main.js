@@ -2,16 +2,38 @@ var host = document.location.host.replace(/:.*/, '');
 var ws = null; 
 var gameStarted = false;
 var bubbleTrack = document.querySelector('.bubble-track');
+<<<<<<< HEAD
 var self = null;
 
 function addBubble(a) { 
+=======
+
+
+function addBubble(a, b) { 
+>>>>>>> 117634bf78f844813fe49a2a34ef8f3119445e60
     var bubble = document.createElement('div');
     bubble.classList.add('bubble');
     bubble.classList.add(a);
     bubble.classList.add('rtl');
     bubble.innerHTML = a;
     bubbleTrack.appendChild(bubble); 
+<<<<<<< HEAD
     setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
+=======
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
+}
+
+
+function addOpponentBubble(a, b) { 
+    var bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+    bubble.classList.add(a);
+    bubble.classList.add('ltr');
+    bubble.innerHTML = b;
+    bubbleTrack.appendChild(bubble); 
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
+
+>>>>>>> 117634bf78f844813fe49a2a34ef8f3119445e60
 }
 function addOpponentBubble(a) { 
     var bubble = document.createElement('div');
@@ -61,6 +83,9 @@ function socketOnMessage(event) {
     }
     if (data.chargeyihao != undefined) {
         document.querySelector('#chargeyihao').innerHTML = 'Charge: ' + data.chargeyihao;
+        var player= document.querySelector('.player');
+        var da = 0.2*(data.chargeyihao) + 1;
+        player.style.transform = 'scale(' + da + ')';
     }
     if (data.opponentmove) {
         addBubble(self);

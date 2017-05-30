@@ -47,19 +47,6 @@ div {
     }
 }
 
-
-@keyframes bigger{
-    0%{
-        left:calc(0%);
-    }
-    50%{
-        transform:scale(2);
-    }
-    100%{
-        left:calc(0%);
-    }
-}
-
 .bubble-track {
     position: absolute;
     top: 50%;
@@ -100,10 +87,36 @@ div {
     }
 }
 
+.bigger{
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    left: 20px;
+    background-image:url(../images/player-idle.jpg);
+    &.getsbigger{
+        animation-name: getbigger;
+        animation-duration: 1s;
+        animation-timing-function:linear;
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 .ocean {
     margin:0px;
     height: 80vh;
     .player, .opponent {
+        transition: all 333ms ease-in-out;
         position: absolute;
         top: 50%;
         width: 80px;
@@ -112,10 +125,10 @@ div {
         }
     }
     .player {
-        left: 20px;
+        left: 70px;
     }
     .opponent {
-        right: 20px;
+        right: 70px;
     }
     h1 {
         position: absolute;

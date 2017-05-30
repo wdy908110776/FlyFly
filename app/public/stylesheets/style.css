@@ -466,17 +466,6 @@ div {
     right: calc(50% - 35px);
   }
 }
-@keyframes bigger {
-  0% {
-    left: calc(0%);
-  }
-  50% {
-    transform: scale(2);
-  }
-  100% {
-    left: calc(0%);
-  }
-}
 .bubble-track {
   position: absolute;
   top: 50%;
@@ -508,7 +497,11 @@ div {
 }
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
+<<<<<<< HEAD
   animation-duration: 5s;
+=======
+  animation-duration: 1s;
+>>>>>>> 117634bf78f844813fe49a2a34ef8f3119445e60
   animation-timing-function: ease-in;
 }
 .bubble-track .bubble.ltr {
@@ -517,11 +510,25 @@ div {
   animation-timing-function: ease-in;
 }
 
+.bigger {
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  left: 20px;
+  background-image: url(../images/player-idle.jpg);
+}
+.bigger.getsbigger {
+  animation-name: getbigger;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+}
+
 .ocean {
   margin: 0px;
   height: 80vh;
 }
 .ocean .player, .ocean .opponent {
+  transition: all 333ms ease-in-out;
   position: absolute;
   top: 50%;
   width: 80px;
@@ -530,10 +537,10 @@ div {
   width: 100%;
 }
 .ocean .player {
-  left: 20px;
+  left: 70px;
 }
 .ocean .opponent {
-  right: 20px;
+  right: 70px;
 }
 .ocean h1 {
   position: absolute;
