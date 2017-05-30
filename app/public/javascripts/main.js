@@ -4,32 +4,18 @@ var gameStarted = false;
 var bubbleTrack = document.querySelector('.bubble-track');
 var self = null;
 
-
-
-
-function addBubble(a, b) { 
-
+function addBubble(a) { 
     var bubble = document.createElement('div');
     bubble.classList.add('bubble');
     bubble.classList.add(a);
     bubble.classList.add('rtl');
     bubble.innerHTML = a;
     bubbleTrack.appendChild(bubble); 
-    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
-}
-
-
-function addOpponentBubble(a, b) { 
-    var bubble = document.createElement('div');
-    bubble.classList.add('bubble');
-    bubble.classList.add(a);
-    bubble.classList.add('ltr');
-    bubble.innerHTML = b;
-    bubbleTrack.appendChild(bubble); 
     setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
-
-
 }
+
+
+
 function addOpponentBubble(a) { 
     var bubble = document.createElement('div');
     bubble.classList.add('bubble');
