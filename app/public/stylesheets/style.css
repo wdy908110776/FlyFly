@@ -460,10 +460,10 @@ div {
 }
 @keyframes left-to-right {
   0% {
-    right: calc(0%);
+    right: calc(0% + 80px);
   }
   100% {
-    left: calc(50% - 35px);
+    right: calc(50% - 35px);
   }
 }
 @keyframes bigger {
@@ -508,18 +508,13 @@ div {
 }
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
-<<<<<<< HEAD
-  animation-duration: 1s;
-  animation-timing-function: ease-in;
-=======
   animation-duration: 5s;
-  animation-timing-function: linear;
->>>>>>> 4cb5594b664c5a680956d14c9d73e5e99f6c0cb0
+  animation-timing-function: ease-in;
 }
 .bubble-track .bubble.ltr {
   animation-name: left-to-right;
   animation-duration: 5s;
-  animation-timing-function: linear;
+  animation-timing-function: ease-in;
 }
 
 .ocean {
@@ -558,6 +553,9 @@ div {
   left: 50%;
   font-size: 300%;
   transform: translate3d(-50%, -50%, 0px);
+}
+.ocean h3 .opponent {
+  display: none;
 }
 
 .floor {

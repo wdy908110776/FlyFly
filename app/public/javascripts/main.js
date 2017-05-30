@@ -2,26 +2,23 @@ var host = document.location.host.replace(/:.*/, '');
 var ws = null; 
 var gameStarted = false;
 var bubbleTrack = document.querySelector('.bubble-track');
-function addBubble(a, b) { 
+var self = null;
+
+function addBubble(a) { 
     var bubble = document.createElement('div');
     bubble.classList.add('bubble');
     bubble.classList.add(a);
     bubble.classList.add('rtl');
-    bubble.innerHTML = b;
+    bubble.innerHTML = a;
     bubbleTrack.appendChild(bubble); 
-<<<<<<< HEAD
-    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
-=======
     setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
->>>>>>> 4cb5594b664c5a680956d14c9d73e5e99f6c0cb0
-
 }
-function addOpponentBubble(a, b) { 
+function addOpponentBubble(a) { 
     var bubble = document.createElement('div');
     bubble.classList.add('bubble');
     bubble.classList.add(a);
     bubble.classList.add('ltr');
-    bubble.innerHTML = b;
+    bubble.innerHTML = a;
     bubbleTrack.appendChild(bubble); 
     setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
 
@@ -51,7 +48,6 @@ function socketOnError(error) {
     showMenu();
 }
 
-
 function socketOnMessage(event) {
     
     console.log(event.data);
@@ -66,27 +62,26 @@ function socketOnMessage(event) {
     if (data.chargeyihao != undefined) {
         document.querySelector('#chargeyihao').innerHTML = 'Charge: ' + data.chargeyihao;
     }
-    if (data.opponenta && data.opponentb) {
-        oa = data.opponenta;
-        ob = data.opponentb;
+    if (data.opponentmove) {
+        addBubble(self);
+        addOpponentBubble(data.opponentmove);
     }
-    // if (data.selftype == bubble) {
     var countdown = document.querySelector('#countdown');
     if (data.tie) {
-        countdown.innerHTML = 'IT\'S A TIE';
         setTimeout(function() {
+            countdown.innerHTML = 'IT\'S A TIE';
             endGame();
         }, 5000)
     }
     else if (data.win === true) {
-        countdown.innerHTML = 'YOU WIN!';
         setTimeout(function() {
+            countdown.innerHTML = 'YOU WIN!';
             endGame();
         }, 5000)();
     }
     else if (data.win === false) {
-        countdown.innerHTML = 'YOU LOSE';
         setTimeout(function() {
+            countdown.innerHTML = 'YOU LOSE';
             endGame();
         }, 5000)
     }
@@ -128,43 +123,50 @@ document.querySelector('#start').addEventListener('click', startGame);
 document.querySelector('#charge').onclick = function() {
     socketSend(JSON.stringify({
         value: -1,
+        name:'charge'
     }));
 }
 document.querySelector('#bubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 1,
+        name:'bubble'
     }));
-    addBubble('bubble', 'BUBBLE');
+    self = 'bubble';
 }
 document.querySelector('#copperbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 2,
+        name:'copper'
     }));
-    addBubble('copper', 'COPPER');
+    self = 'copper';
 }
 document.querySelector('#ironbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 3,
+        name:'iron'
     }));
-    addBubble('iron', 'IRON');
+    self = 'iron';
 }
 document.querySelector('#goldbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 4,
+        name:'gold'
     }));
-    addBubble('gold', 'GOLD');
+    self = 'gold';
 }
 document.querySelector('#crystalbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 5,
+        name:'crystal'
     }));
-    addBubble('crystal', 'CRYSTAL');
+    self = 'crystall';
 }
 document.querySelector('#diamondbubble').onclick = function() {
     socketSend(JSON.stringify({
         value: 6,
+        name:'diamond'
     }));
-    addBubble('diamond', 'DIAMOND');
+    self = 'diamond';
 }
 document.querySelector('#normal').onclick = function() {
     socketSend(JSON.stringify({
