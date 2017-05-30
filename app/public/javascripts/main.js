@@ -2,7 +2,8 @@ var host = document.location.host.replace(/:.*/, '');
 var ws = null; 
 var gameStarted = false;
 var bubbleTrack = document.querySelector('.bubble-track');
-var bigger = document.querySelector('.bigger')
+
+
 function addBubble(a, b) { 
     var bubble = document.createElement('div');
     bubble.classList.add('bubble');
@@ -11,18 +12,9 @@ function addBubble(a, b) {
     bubble.innerHTML = b;
     bubbleTrack.appendChild(bubble); 
     setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
-
-
-function becomebigger(mira,mira2){
-    var Bbigger= document.createElement('bigMira');
-    Bbigger.classList.add('charge');
-    Bbigger.classList.add(mira);
-    Bbigger.classList.add('gitsbigger');
-    Bbigger.innerHTML = mira;
-    bigger,appendChild(mira);
-    setTimeout(function() { bigger.removeChild(mira);},1000)
-    
 }
+
+
 function addOpponentBubble(a, b) { 
     var bubble = document.createElement('div');
     bubble.classList.add('bubble');
@@ -82,6 +74,9 @@ function socketOnMessage(event) {
     }
     if (data.chargeyihao != undefined) {
         document.querySelector('#chargeyihao').innerHTML = 'Charge: ' + data.chargeyihao;
+        var player= document.querySelector('.player');
+        var da = 0.2*(data.chargeyihao) + 1;
+        player.style.transform = 'scale(' + da + ')';
     }
     if (data.opponenta && data.opponentb) {
         oa = data.opponenta;
@@ -146,7 +141,6 @@ document.querySelector('#charge').onclick = function() {
     socketSend(JSON.stringify({
         value: -1,
     }));
-    becomebigger('charge','Miras')
 }
 document.querySelector('#bubble').onclick = function() {
     socketSend(JSON.stringify({

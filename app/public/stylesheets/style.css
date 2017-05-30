@@ -456,8 +456,6 @@ div {
   }
   100% {
     left: calc(50% - 35px);
-<<<<<<< HEAD
-=======
   }
 }
 @keyframes left-to-right {
@@ -466,26 +464,6 @@ div {
   }
   100% {
     left: calc(50% - 35px);
->>>>>>> 99445504fe309f1ee3da5e273e92cad985db3bb5
-  }
-}
-@keyframes left-to-right {
-  0% {
-    right: calc(0%);
-  }
-  100% {
-    left: calc(50% - 35px);
-  }
-}
-@keyframes getbigger {
-  0% {
-    left: calc(0%);
-  }
-  50% {
-    transform: scale(2);
-  }
-  100% {
-    left: calc(0%);
   }
 }
 .bubble-track {
@@ -522,6 +500,11 @@ div {
   animation-duration: 1s;
   animation-timing-function: ease-in;
 }
+.bubble-track .bubble.ltr {
+  animation-name: left-to-right;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+}
 
 .bigger {
   position: absolute;
@@ -535,22 +518,13 @@ div {
   animation-duration: 1s;
   animation-timing-function: linear;
 }
-.bubble-track .bubble.ltr {
-  animation-name: left-to-right;
-  animation-duration: 5s;
-  animation-timing-function: linear;
-}
-.bubble-track .bubble.ltr {
-  animation-name: left-to-right;
-  animation-duration: 5s;
-  animation-timing-function: linear;
-}
 
 .ocean {
   margin: 0px;
   height: 80vh;
 }
 .ocean .player, .ocean .opponent {
+  transition: all 333ms ease-in-out;
   position: absolute;
   top: 50%;
   width: 80px;
@@ -559,10 +533,10 @@ div {
   width: 100%;
 }
 .ocean .player {
-  left: 20px;
+  left: 70px;
 }
 .ocean .opponent {
-  right: 20px;
+  right: 70px;
 }
 .ocean h1 {
   position: absolute;
