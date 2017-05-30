@@ -1,7 +1,5 @@
 'use strict';
-
 var GamePlayer = require('./gamePlayer');
-
 class GameSession {
     constructor() {
         this.isGameStarted = false;
@@ -14,9 +12,6 @@ class GameSession {
                 round: this.round,
                 chargeyihao: p.energy
             })
-            // if (!p.energy) {
-            //     chargeyihao: 'zero'
-            // }
         }
     }
     startGame() {
@@ -56,12 +51,21 @@ class GameSession {
     }
 
     decide() {
+        
         var p1 = this.players[0];
         var p2 = this.players[1];
+        
 
         var p1choice = p1.choice;
         var p2choice = p2.choice;
         
+        p1.sendMessage({
+            opponentmove: p2.choicename
+        })
+        p2.sendMessage({
+            opponentmove: p1.choicename
+        })
+
         var p1energy = p1.energy;
         var p2energy = p2.energy;
         
@@ -136,6 +140,7 @@ class GameSession {
             p1.sendMessage({ win: true });
             p2.sendMessage({ win: false });
         }
+        GamePlayer.opponent = [];
     }
 }
 

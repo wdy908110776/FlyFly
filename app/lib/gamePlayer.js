@@ -1,9 +1,10 @@
 'use strict';
-
+// var opponent = []; 
 class GamePlayer {
     constructor(socket) {
         this.index = 0;
         this.choice = null;
+        this.choicename = null;
         this.energy = null;
         this.socket = socket;
         this.socket.on('close', this.onSocketClose.bind(this));
@@ -21,9 +22,12 @@ class GamePlayer {
     onSocketMessage(message) {
         if (this.choice == null) {
             console.log('Player 1 Message', message);
-            this.choice = parseInt(JSON.parse(message).value);
-            this.choicetype = parseInt(JSON.parse(message).type);
+            message = JSON.parse(message);
+            this.choice = parseInt(message.value);
+            this.choicename = message.name;
             this.onMove(this);
+            // opponent.push(JSON.parse(message).name);
+            // console.log(opponent);
         }
     }
     onSocketClose() {
