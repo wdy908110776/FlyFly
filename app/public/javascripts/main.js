@@ -11,7 +11,7 @@ function addBubble(a) {
     bubble.classList.add('rtl');
     bubble.innerHTML = a;
     bubbleTrack.appendChild(bubble); 
-    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
 }
 
 
@@ -23,7 +23,7 @@ function addOpponentBubble(a) {
     bubble.classList.add('ltr');
     bubble.innerHTML = a;
     bubbleTrack.appendChild(bubble); 
-    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
+    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
 
 }
 

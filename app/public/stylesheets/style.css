@@ -497,12 +497,12 @@ div {
 }
 .bubble-track .bubble.rtl {
   animation-name: right-to-left;
-  animation-duration: 5s;
+  animation-duration: 1s;
   animation-timing-function: ease-in;
 }
 .bubble-track .bubble.ltr {
   animation-name: left-to-right;
-  animation-duration: 5s;
+  animation-duration: 1s;
   animation-timing-function: ease-in;
 }
 
