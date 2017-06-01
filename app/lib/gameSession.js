@@ -59,16 +59,22 @@ class GameSession {
         var p1choice = p1.choice;
         var p2choice = p2.choice;
         
-        p1.sendMessage({
-            opponentmove: p2.choicename
-        })
-        p2.sendMessage({
-            opponentmove: p1.choicename
-        })
-
         var p1energy = p1.energy;
         var p2energy = p2.energy;
         
+        p1.sendMessage({
+            selfchoice:p1.choice,
+            opponentvalue:p2.choice,
+            opponentmove: p2.choicename,
+            opponentchargeyihao: p2.energy
+        })
+        p2.sendMessage({
+            selfchoice:p2.choice,
+            opponentvalue:p1.choice,
+            opponentmove: p1.choicename,
+            opponentchargeyihao: p1.energy
+        })
+
         if (p1choice == null || p2choice == null) return;
         
         var alive1 = true;

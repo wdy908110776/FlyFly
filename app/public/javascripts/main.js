@@ -64,13 +64,26 @@ function socketOnMessage(event) {
     }
     if (data.chargeyihao != undefined) {
         document.querySelector('#chargeyihao').innerHTML = 'Charge: ' + data.chargeyihao;
-        var player= document.querySelector('.player');
-        var da = 0.2*(data.chargeyihao) + 1;
-        player.style.transform = 'scale(' + da + ')';
     }
     if (data.opponentmove) {
-        addBubble(self);
-        addOpponentBubble(data.opponentmove);
+        // var player= document.querySelector('.player');
+        // var opponent= document.querySelector('.opponent');
+        
+        // var da = 0.2*(data.chargeyihao) + 1;
+        // if (self == 'charge') {
+        //     player.style.transform = 'scale(' + da + ')';
+        // }else {
+        //     player.style.transform = 'scale(' + Math.Pow(da,data.selfchoice) + ')';
+            addBubble(self);
+        // }
+        
+        // var opda = 0.2*(data.opponentchargeyihao) + 1;
+        // if (data.opponentmove == 'charge') {
+        //     opponent.style.transform = 'scale(' + opda + ')';
+        // }else {
+        //     opponent.style.transform = 'scale(' + Math.Pow(opda,data.opponentvalue) + ')';
+            addOpponentBubble(data.opponentmove);
+        // }
     }
     var countdown = document.querySelector('#countdown');
     if (data.tie) {
@@ -131,6 +144,7 @@ document.querySelector('#charge').onclick = function() {
         value: -1,
         name:'charge'
     }));
+    self = 'charge';
 }
 document.querySelector('#bubble').onclick = function() {
     socketSend(JSON.stringify({
@@ -178,9 +192,11 @@ document.querySelector('#normal').onclick = function() {
     socketSend(JSON.stringify({
         value: 15,
     }));
+    self = 'normal';
 }
 document.querySelector('#super').onclick = function() {
     socketSend(JSON.stringify({
         value: 16,
     }));
+    self = 'super';
 }
