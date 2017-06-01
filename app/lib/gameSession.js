@@ -64,13 +64,11 @@ class GameSession {
         
         p1.sendMessage({
             selfchoice:p1.choice,
-            opponentvalue:p2.choice,
             opponentmove: p2.choicename,
             opponentchargeyihao: p2.energy
         })
         p2.sendMessage({
             selfchoice:p2.choice,
-            opponentvalue:p1.choice,
             opponentmove: p1.choicename,
             opponentchargeyihao: p1.energy
         })
@@ -81,9 +79,9 @@ class GameSession {
         var alive2 = true;
     
         var temp = p1choice;
-        if (p1choice == 15) {
+        if (p1choice == 7) {
             p1choice = 0;
-        }else if (p1choice == 16) {
+        }else if (p1choice == 8) {
             p1choice = 1;
         }
         p1energy -= p1choice;
@@ -93,9 +91,9 @@ class GameSession {
             p1choice = -2;
         }
         temp = p2choice;
-        if (p2choice == 15) {
+        if (p2choice == 7) {
             p2choice = 0;
-        }else if (p2choice == 16) {
+        }else if (p2choice == 8) {
             p2choice = 1;
         }
         p2energy -= p2choice;
@@ -107,16 +105,16 @@ class GameSession {
         console.log(p1energy);
         console.log(p2energy);
         
-        if (p1choice == 6 && p2choice != 15) {
+        if (p1choice == 6 && p2choice != 8 && p2choice != 6) {
             alive2 = false;
         }
-        else if (p2choice == 6 && p1choice != 16) {
+        else if (p2choice == 6 && p1choice != 8 && p1choice != 6) {
             alive1 = false;
         }
-        else if (p1choice == 15 || p1choice == 16) {
+        else if (p1choice == 7 || p1choice == 8) {
             p1choice = p2choice;
         }
-        else if (p2choice == 15 || p2choice == 16) {
+        else if (p2choice == 7 || p2choice == 8) {
             p2choice = p1choice;
         }
         else if (p1choice > p2choice) {
