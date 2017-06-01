@@ -24,7 +24,7 @@ class GamePlayer {
             console.log('Player 1 Message', message);
             message = JSON.parse(message);
             this.choice = parseInt(message.value);
-            this.choicename = message.name;
+            this.choicename = message;
             this.onMove(this);
             // opponent.push(JSON.parse(message).name);
             // console.log(opponent);

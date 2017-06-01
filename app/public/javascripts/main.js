@@ -3,7 +3,7 @@ var ws = null;
 var gameStarted = false;
 var bubbleTrack = document.querySelector('.bubble-track');
 var self = null;
-
+var selfc = 0, oppc = 0, chargeerhao, chargesanhao, da, opda;
 function addBubble(a) { 
     var bubble = document.createElement('div');
     bubble.classList.add('bubble');
@@ -65,25 +65,30 @@ function socketOnMessage(event) {
     if (data.chargeyihao != undefined) {
         document.querySelector('#chargeyihao').innerHTML = 'Charge: ' + data.chargeyihao;
     }
-    if (data.opponentmove) {
-        // var player= document.querySelector('.player');
-        // var opponent= document.querySelector('.opponent');
-        
-        // var da = 0.2*(data.chargeyihao) + 1;
-        // if (self == 'charge') {
-        //     player.style.transform = 'scale(' + da + ')';
-        // }else {
-        //     player.style.transform = 'scale(' + Math.Pow(da,data.selfchoice) + ')';
+    if (data.opponentmove && self) {
+        var player= document.querySelector('.player');
+        var opponent= document.querySelector('.opponent');
+        if (self != 'charge' && self != 'normal' && self != 'super') {
             addBubble(self);
-        // }
-        
-        // var opda = 0.2*(data.opponentchargeyihao) + 1;
-        // if (data.opponentmove == 'charge') {
-        //     opponent.style.transform = 'scale(' + opda + ')';
-        // }else {
-        //     opponent.style.transform = 'scale(' + Math.Pow(opda,data.opponentvalue) + ')';
-            addOpponentBubble(data.opponentmove);
-        // }
+        }
+        console.log(data.opponentmove.name);
+        if (data.opponentmove.name != 'charge' && data.opponentmove.name != 'super' && data.opponentmove.name != 'normal' ) {
+            addOpponentBubble(data.opponentmove.name);
+        }
+        chargeerhao = data.selfchoice;
+        chargesanhao = data.opponentmove.value;
+        if(chargeerhao > 6) {
+            chargeerhao -= 7;
+        }
+        if(chargesanhao > 6) {
+            chargesanhao -= 7;
+        }
+        oppc -= chargesanhao;
+        selfc -= chargeerhao;
+        opda = 0.2*(oppc) + 1;
+        da = 0.2*(selfc) + 1;
+        player.style.transform = 'scale('+ da +')';
+        opponent.style.transform = 'scale('+ opda +')';
     }
     var countdown = document.querySelector('#countdown');
     if (data.tie) {
@@ -96,7 +101,7 @@ function socketOnMessage(event) {
         setTimeout(function() {
             countdown.innerHTML = 'YOU WIN!';
             endGame();
-        }, 5000)();
+        }, 5000);
     }
     else if (data.win === false) {
         setTimeout(function() {
@@ -190,13 +195,31 @@ document.querySelector('#diamondbubble').onclick = function() {
 }
 document.querySelector('#normal').onclick = function() {
     socketSend(JSON.stringify({
-        value: 15,
+        value: 7,
+        name:'normal'
     }));
     self = 'normal';
 }
 document.querySelector('#super').onclick = function() {
     socketSend(JSON.stringify({
-        value: 16,
+        value: 8,
+        name:'super'
     }));
     self = 'super';
 }
+// var player= document.querySelector('.player');
+        // var opponent= document.querySelector('.opponent');
+        
+        // var da = 0.2*(data.chargeyihao) + 1;
+        // if (self == 'charge') {
+        //     player.style.transform = 'scale(' + da + ')';
+        // }else {
+        //     player.style.transform = 'scale(' + Math.Pow(da,data.selfchoice) + ')';
+        // }
+        
+        // var opda = 0.2*(data.opponentchargeyihao) + 1;
+        // if (data.opponentmove == 'charge') {
+        //     opponent.style.transform = 'scale(' + opda + ')';
+        // }else {
+        //     opponent.style.transform = 'scale(' + Math.Pow(opda,data.opponentvalue) + ')';
+        // }
