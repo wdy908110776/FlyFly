@@ -43,6 +43,8 @@ function socketSend(message) {
 
 function socketOnOpen() {
     hideMenu();
+    document.querySelector('.player').style.transform = 'scale(1)';
+    document.querySelector('.opponent').style.transform = 'scale(1)';
 }
 
 
@@ -124,8 +126,6 @@ function startGame() {
    
    document.querySelector('#countdown').innerHTML = '';
    document.querySelector('#chargeyihao').innerHTML = '';
-//   document.querySelector('#bubbleimg').innerHTML = '';
-//   document.querySelector('#shield').innerHTML = '';
    
    ws = new WebSocket('wss://' + host);
    ws.onopen = socketOnOpen;
