@@ -4,29 +4,13 @@ var gameStarted = false;
 var bubbleTrack = document.querySelector('.bubble-track');
 var self = null;
 var selfc = 0, oppc = 0, chargeerhao, chargesanhao, da, opda;
-function addBubble(a) { 
-    var bubble = document.createElement('div');
-    bubble.classList.add('bubble');
-    bubble.classList.add(a);
-    bubble.classList.add('rtl');
-    bubble.innerHTML = a;
-    bubbleTrack.appendChild(bubble); 
-    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
-}
 
 
 
-function addOpponentBubble(a) { 
-    var bubble = document.createElement('div');
-    bubble.classList.add('bubble');
-    bubble.classList.add(a);
-    bubble.classList.add('ltr');
-    bubble.innerHTML = a;
-    bubbleTrack.appendChild(bubble); 
-    setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
 
-}
 
+
+ 
 function showMenu() {
     document.querySelector('.menu').style.display = 'block';
 }
@@ -111,7 +95,51 @@ function socketOnMessage(event) {
             endGame();
         }, 5000)
     }
+    
+    function addBubble(a) { 
+    var bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+    bubble.classList.add(a);
+    bubble.classList.add('rtl');
+    bubble.innerHTML = a;
+    bubbleTrack.appendChild(bubble); 
+    if(data.selfchoice<=data.opponentmove.value){
+        setTimeout(function() { bubbleTrack.removeChild(bubble); }, 2500);
+        
+    }else{
+        setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
+    }
 }
+
+
+
+function addOpponentBubble(a) { 
+    var bubble1 = document.createElement('div');
+    bubble1.classList.add('bubble');
+    bubble1.classList.add(a);
+    bubble1.classList.add('ltr');
+    bubble1.innerHTML = a;
+    bubbleTrack.appendChild(bubble1); 
+    
+    if(data.opponentmove.value>=data.selfchoice){
+        setTimeout(function() { bubbleTrack.removeChild(bubble1); }, 2500);
+    }else{
+        setTimeout(function() { bubbleTrack.removeChild(bubble1); }, 5000);
+    }
+}
+
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
 
 function endGame() {
    if (ws != null) {
