@@ -23,6 +23,7 @@ function socketOnOpen() {
     hideMenu();
     document.querySelector('.player').style.transform = 'scale(1)';
     document.querySelector('.opponent').style.transform = 'scale(1)';
+    selfc = 0;
 }
 
 

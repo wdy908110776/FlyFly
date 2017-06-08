@@ -51,13 +51,16 @@ class GameSession {
     }
 
     decide() {
-        
         var p1 = this.players[0];
         var p2 = this.players[1];
         
-
+        if (this.players.length == 1) {
+            return;
+        }
+        
         var p1choice = p1.choice;
         var p2choice = p2.choice;
+        
         
         var p1energy = p1.energy;
         var p2energy = p2.energy;
