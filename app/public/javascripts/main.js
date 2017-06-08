@@ -5,12 +5,6 @@ var bubbleTrack = document.querySelector('.bubble-track');
 var self = null;
 var selfc = 0, oppc = 0, chargeerhao, chargesanhao, da, opda;
 
-
-
-
-
-
- 
 function showMenu() {
     document.querySelector('.menu').style.display = 'block';
 }
@@ -57,10 +51,16 @@ function socketOnMessage(event) {
         if (self != 'charge' && self != 'normal' && self != 'super') {
             addBubble(self);
         }
+        // if (self == "normal") {
+        //     document.querySelector('#selfshield').style.display = 'block';
+        // }
         console.log(data.opponentmove.name);
         if (data.opponentmove.name != 'charge' && data.opponentmove.name != 'super' && data.opponentmove.name != 'normal' ) {
             addOpponentBubble(data.opponentmove.name);
         }
+        // if (data.opponentmove.name == "normal") {
+        //     document.querySelector('#oppshield').style.display = 'block';
+        // }
         chargeerhao = data.selfchoice;
         chargesanhao = data.opponentmove.value;
         if(chargeerhao > 6) {
@@ -97,50 +97,39 @@ function socketOnMessage(event) {
     }
     
     function addBubble(a) { 
-    var bubble = document.createElement('div');
-    bubble.classList.add('bubble');
-    bubble.classList.add(a);
-    bubble.classList.add('rtl');
-    bubble.innerHTML = a;
-    bubbleTrack.appendChild(bubble); 
-    if(data.selfchoice<=data.opponentmove.value){
-        setTimeout(function() { bubbleTrack.removeChild(bubble); }, 2500);
+        var bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.classList.add(a);
+        bubble.classList.add('rtl');
+        bubble.innerHTML = a;
+        bubbleTrack.appendChild(bubble); 
+        if(data.selfchoice<=data.opponentmove.value){
+            setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
+            
+        }else{
+            setTimeout(function() { bubbleTrack.removeChild(bubble); }, 2000);
+        }
+    }
+
+
+
+    function addOpponentBubble(a) { 
+        var bubble1 = document.createElement('div');
+        bubble1.classList.add('bubble');
+        bubble1.classList.add(a);
+        bubble1.classList.add('ltr');
+        bubble1.innerHTML = a;
+        bubbleTrack.appendChild(bubble1); 
         
-    }else{
-        setTimeout(function() { bubbleTrack.removeChild(bubble); }, 5000);
+        if(data.opponentmove.value<=data.selfchoice) {
+            setTimeout(function() { bubbleTrack.removeChild(bubble1); }, 1000);
+        }else { 
+            setTimeout(function() { bubbleTrack.removeChild(bubble1); }, 2000);
+        }
     }
+    document.querySelector('#selfshield').style.display = 'none';
+    document.querySelector('#oppshield').style.display = 'none';
 }
-
-
-
-function addOpponentBubble(a) { 
-    var bubble1 = document.createElement('div');
-    bubble1.classList.add('bubble');
-    bubble1.classList.add(a);
-    bubble1.classList.add('ltr');
-    bubble1.innerHTML = a;
-    bubbleTrack.appendChild(bubble1); 
-    
-    if(data.opponentmove.value>=data.selfchoice){
-        setTimeout(function() { bubbleTrack.removeChild(bubble1); }, 2500);
-    }else{
-        setTimeout(function() { bubbleTrack.removeChild(bubble1); }, 5000);
-    }
-}
-
-    
-    
-    
-    
-    
-}
-
-
-
-
-
-
-
 function endGame() {
    if (ws != null) {
        ws.close();
