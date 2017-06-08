@@ -53,12 +53,20 @@ function socketOnMessage(event) {
         if (self == "normal") {
             document.querySelector('#selfshield').style.display = 'block';
         }
+        if (self == "super") {
+            document.querySelector('#selfshield').style.display = 'block';
+            document.querySelector('#selfshield').style.opacity = 0.9;
+        }
         console.log(data.opponentmove.name);
         if (data.opponentmove.name != 'charge' && data.opponentmove.name != 'super' && data.opponentmove.name != 'normal' ) {
             addOpponentBubble(data.opponentmove.name);
         }
         if (data.opponentmove.name == "normal") {
             document.querySelector('#oppshield').style.display = 'block';
+        }
+        if (data.opponentmove.name == "super") {
+            document.querySelector('#oppshield').style.display = 'block';
+            document.querySelector('#oppshield').style.opacity = 0.9;
         }
         chargeerhao = data.selfchoice;
         chargesanhao = data.opponentmove.value;
@@ -80,19 +88,19 @@ function socketOnMessage(event) {
         setTimeout(function() {
             countdown.innerHTML = 'IT\'S A TIE';
             endGame();
-        }, 5000)
+        }, 3500)
     }
     else if (data.win === true) {
         setTimeout(function() {
             countdown.innerHTML = 'YOU WIN!';
             endGame();
-        }, 5000);
+        }, 3500);
     }
     else if (data.win === false) {
         setTimeout(function() {
             countdown.innerHTML = 'YOU LOSE';
             endGame();
-        }, 5000)
+        }, 3500)
     }
     
     function addBubble(a) { 
