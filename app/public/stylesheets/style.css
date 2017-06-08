@@ -574,8 +574,24 @@ div {
 .ocean .player {
   left: 70px;
 }
+.ocean .player #selfshield {
+  position: absolute;
+  display: none;
+  opacity: 0.4;
+  height: 200px;
+  width: 200px;
+  top: calc(50% - 80px);
+}
 .ocean .opponent {
   right: 70px;
+}
+.ocean .opponent #oppshield {
+  position: absolute;
+  opacity: 0.4;
+  display: none;
+  height: 200px;
+  width: 200px;
+  top: calc(50% - 80px);
 }
 .ocean h1 {
   position: absolute;
@@ -628,6 +644,7 @@ div {
   background-image: url(../images/shell.png);
   background-size: contain;
   background-color: transparent;
+  outline: none;
 }
 
 .menu {

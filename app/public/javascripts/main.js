@@ -32,7 +32,6 @@ function socketOnError(error) {
 }
 
 function socketOnMessage(event) {
-    
     console.log(event.data);
     var data = JSON.parse(event.data);
     if (data.player) {
@@ -51,16 +50,16 @@ function socketOnMessage(event) {
         if (self != 'charge' && self != 'normal' && self != 'super') {
             addBubble(self);
         }
-        // if (self == "normal") {
-        //     document.querySelector('#selfshield').style.display = 'block';
-        // }
+        if (self == "normal") {
+            document.querySelector('#selfshield').style.display = 'block';
+        }
         console.log(data.opponentmove.name);
         if (data.opponentmove.name != 'charge' && data.opponentmove.name != 'super' && data.opponentmove.name != 'normal' ) {
             addOpponentBubble(data.opponentmove.name);
         }
-        // if (data.opponentmove.name == "normal") {
-        //     document.querySelector('#oppshield').style.display = 'block';
-        // }
+        if (data.opponentmove.name == "normal") {
+            document.querySelector('#oppshield').style.display = 'block';
+        }
         chargeerhao = data.selfchoice;
         chargesanhao = data.opponentmove.value;
         if(chargeerhao > 6) {
@@ -103,14 +102,17 @@ function socketOnMessage(event) {
         bubble.classList.add('rtl');
         bubble.innerHTML = a;
         bubbleTrack.appendChild(bubble); 
-        if(data.selfchoice<=data.opponentmove.value){
+        if(data.selfchoice<=data.opponentmove.value && data.opponentmove.name != "normal" && data.opponentmove.name != "super"){
             setTimeout(function() { bubbleTrack.removeChild(bubble); }, 1000);
             
         }else{
             setTimeout(function() { bubbleTrack.removeChild(bubble); }, 2000);
         }
     }
-
+    setTimeout(function() {
+        document.querySelector('#selfshield').style.display = 'none';
+        document.querySelector('#oppshield').style.display = 'none';
+    }, 3000);
 
 
     function addOpponentBubble(a) { 
@@ -121,14 +123,12 @@ function socketOnMessage(event) {
         bubble1.innerHTML = a;
         bubbleTrack.appendChild(bubble1); 
         
-        if(data.opponentmove.value<=data.selfchoice) {
+        if(data.opponentmove.value<=data.selfchoice && self != "normal" && self != "super") {
             setTimeout(function() { bubbleTrack.removeChild(bubble1); }, 1000);
         }else { 
             setTimeout(function() { bubbleTrack.removeChild(bubble1); }, 2000);
         }
     }
-    document.querySelector('#selfshield').style.display = 'none';
-    document.querySelector('#oppshield').style.display = 'none';
 }
 function endGame() {
    if (ws != null) {

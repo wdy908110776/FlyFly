@@ -161,25 +161,25 @@ div {
     }
     .player {
         left: 70px;
-        // #selfshield {
-        //     position: absolute;
-        //     display: none;
-        //     opacity: 0.4;
-        //     height: 152px;
-        //     width: 140px;
-        //     top: calc(50% - 80px);
-        // }
+        #selfshield {
+            position: absolute;
+            display: none;
+            opacity: 0.4;
+            height: 200px;
+            width: 200px;
+            top: calc(50% - 80px);
+        }
     }
     .opponent {
         right: 70px;
-        // #oppshield {
-        //     position: absolute;
-        //     opacity: 0.4;
-        //     display: none;
-        //     width: 140px;
-        //     height: 152px;
-        //     top: calc(50% - 80px);
-        // }
+        #oppshield {
+            position: absolute;
+            opacity: 0.4;
+            display: none;
+            height: 200px;
+            width: 200px;
+            top: calc(50% - 80px);
+        }
     }
     h1 {
         position: absolute;
@@ -233,6 +233,7 @@ div {
         background-image:url(../images/shell.png);
         background-size: contain;
         background-color: transparent;
+        outline: none;
     }
 }
 
