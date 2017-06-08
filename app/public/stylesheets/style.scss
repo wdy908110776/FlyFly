@@ -154,7 +154,7 @@ div {
         transition: all 333ms ease-in-out;
         position: absolute;
         top: 50%;
-        width: 80px;
+        width: 150px;
         img {
             width: 100%
         }
@@ -229,8 +229,10 @@ div {
     button {
         width: 70px;
         height: 70px;
-        border-radius: 50px;
-        border: 5px dotted black;
+        border: none;
+        background-image:url(../images/shell.png);
+        background-size: contain;
+        background-color: transparent;
     }
 }
 
